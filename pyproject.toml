@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hyppe"
+version = "0.1.0"
+description = "Klient API i narzedzia do hackathonu Hack the Promoter (iGEM Warsaw 2026)"
+requires-python = ">=3.10"
+dependencies = []          # celowo zero zaleznosci -- dziala na golym Pythonie
+
+[project.optional-dependencies]
+analiza = ["pandas", "matplotlib"]   # tylko do notebookow/wykresow
+dev = ["pytest"]
+
+[project.scripts]
+hyppe = "hyppe.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["hyppe*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
