@@ -85,7 +85,40 @@ odczytania sygnału z rankingu zamiast z Sędziego.
 
 ## 4. Kierunki — co robić dalej
 
-### K1 · Więcej niezależnych ziaren *(w toku — E08)*
+### K1 · Więcej niezależnych ziaren — **WYCZERPANY** *(E08, zmierzone)*
+
+> **Wynik jest negatywny i unieważnia pierwotne oczekiwanie tej sekcji.**
+
+E08 dobrało pulę do **110 ziaren** (594 losowania, 8,6 % trafień — zgodnie
+z W21; tylko 6 odrzuconych jako to samo skupienie). `v4.fasta` = **100 ziaren,
+każde z osobnego skupienia**: wzajemne dystanse 41–115 pz (mediana 70),
+**0 z 4950 par** poniżej progu 40, próbka 25/25 przechodzi bramkę.
+
+| zgłoszenie | niezależnych korzeni | TOP10 | ALL100 | punkty |
+|---|---|---|---|---|
+| v3 | 56 | poz. **4** | poz. 5 | 13,0 |
+| **v4** | **100** | poz. **4** | poz. **4** | **14,0** |
+
+**Podwojenie liczby niezależnych losowań nie ruszyło TOP10 ani o jedną
+pozycję.** ALL100 wzrosło o jedną, co daje +1 punkt i awans na 4. miejsce
+w klasyfikacji łącznej — ale mechanizm, który miał działać, nie zadziałał.
+
+Interpretacja: TOP10 zależy od **górnego ogona rozkładu**, z którego losujemy,
+a nie od liczby losowań. 56 i 100 prób z tego samego rozkładu dają niemal ten
+sam maksymalny wynik. **Rozkład ziaren dekodera ma sufit i jesteśmy przy nim.**
+
+> Konsekwencja dla planu: dalsze losowanie nie ma sensu. Potrzebujemy **innego
+> rozkładu**, a nie większej próby z tego samego — czyli kierunków K3 i K5.
+
+### K1b · Ziarno + edycja na osi rozłącznej *(nowy, nieprzetestowany)*
+
+W12 ustalił, że pozycje hipotez są **rozłączne**: gatunek (154, 287, 362, 430,
+434, 648, 750, 754, 778), CreA (560–565), rdzeń (783–800). Nic nie stoi na
+przeszkodzie, żeby wziąć 100 ziaren z v4 — najlepszą znaną bazę — i nanieść
+na każde edycje gatunkowe. Zachowujemy 100 niezależnych korzeni **i** dokładamy
+wymiar, którego Sędzia nie widzi. Koszt: 100 wywołań `/mapa`.
+
+### K1-oryginalny · Więcej niezależnych ziaren *(zrealizowany, patrz wyżej)*
 
 Bezpośrednia konsekwencja W20–W22 i jedyny kierunek z **potwierdzonym
 mechanizmem**. Cel: **100 ziaren, każde z osobnego skupienia** (v3 ma 56

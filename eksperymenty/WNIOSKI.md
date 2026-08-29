@@ -141,8 +141,9 @@ Uzupełniać po każdym eksperymencie. Puste pola = jeszcze nie wiemy.
 
 | # | plik | skład | ALL100 | TOP10 | punkty | wniosek |
 |---|---|---|---|---|---|---|
-| 1 | `runs/julian/pula.fasta` | `hybryda`: 1 z mapy + 49 z `/edycje` + 50 krzyżówek | **1** | 2 | 17,5 | jednorodna pula — wysoka średnia, brak ogona (W8) |
-| 2 | | | | | | |
+| 1 | `pula.fasta` | `hybryda`: 1 z mapy + 49 `/edycje` + 50 krzyżówek | 1 | 2 | 17,5 | 5 startujących; 3 niezależne korzenie (W22) |
+| 2 | `v3.fasta` | przesiew E07, 100/100 bramka, 56 korzeni | 5 | 4 | 13,0 | 10 startujących — skala rangowa inna, nieporównywalne wprost |
+| 3 | `v4.fasta` | E08, 100/100 bramka, **100 korzeni** | **4** | **4** | **14,0** | **TOP10 bez zmiany mimo 56→100 korzeni → K1 wyczerpany** |
 
 ---
 
@@ -492,3 +493,25 @@ kontrolę, która ją unieważniła:
    Liczby w raporcie były prawdziwe, ale pochodziły z doraźnego skryptu obok
    pipeline'u. Odtwarzalność jest częścią wyniku, nie dodatkiem do niego.
 
+
+
+### W24 — K1 wyczerpany: liczba niezależnych ziaren nie rusza już TOP10
+
+**[OBALONE]** — oczekiwanie z W22, zmierzone w E08.
+
+v3 (56 niezależnych korzeni) i v4 (**100** korzeni, 0/4950 par poniżej progu
+skupienia) dają **tę samą pozycję TOP10 — 4**. Zmieniło się tylko ALL100
+(5 → 4), co daje +1 punkt.
+
+TOP10 zależy od **górnego ogona rozkładu**, z którego losujemy, a nie od liczby
+losowań: 56 i 100 prób z tego samego rozkładu mają niemal identyczne maksimum.
+**Rozkład ziaren dekodera ma sufit i jesteśmy przy nim.**
+
+> Konsekwencja: dalsze losowanie z `/edycje` jest stratą czasu. Potrzebny jest
+> **inny rozkład** — hipotezy gatunkowe (K1b), naturalność (K5) albo test
+> rozjazdu proxy (K4). Czubek tabeli (18,0 pkt, trzy drużyny) jest o 4 punkty
+> wyżej, czyli o dwie pozycje w każdej kategorii.
+
+Zastrzeżenie: przy dziesięciu startujących skala rangowa ma krok 1 punktu,
+więc różnice mniejsze niż jedna pozycja są niewidoczne. Nie wyklucza to
+poprawy surowego wyniku, której ranking nie pokazuje.
