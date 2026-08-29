@@ -1,0 +1,50 @@
+{
+  "eksperyment": "E09_trzy_taktyki",
+  "taktyki": {
+    "K1b": {
+      "plik": "runs/julian/v5_K1b_gatunkowa.fasta",
+      "n": 100,
+      "bramka": "18/20",
+      "blad_odtworzenia": [
+        20,
+        22,
+        23,
+        23,
+        24,
+        25,
+        27,
+        34
+      ]
+    },
+    "K5": {
+      "plik": "runs/julian/v6_K5_naturalnosc.fasta",
+      "n": 100,
+      "bramka": "1/20",
+      "blad_odtworzenia": [
+        75,
+        76,
+        79,
+        81,
+        82,
+        84,
+        85,
+        87
+      ]
+    },
+    "K4": {
+      "plik": "runs/julian/v7_K4_goodhart.fasta",
+      "n": 100,
+      "bramka": "0/20",
+      "blad_odtworzenia": [
+        76,
+        77,
+        79,
+        82,
+        82,
+        83,
+        84,
+        84
+      ]
+    }
+  }
+}

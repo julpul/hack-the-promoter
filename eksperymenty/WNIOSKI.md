@@ -515,3 +515,82 @@ losowań: 56 i 100 prób z tego samego rozkładu mają niemal identyczne maksimu
 Zastrzeżenie: przy dziesięciu startujących skala rangowa ma krok 1 punktu,
 więc różnice mniejsze niż jedna pozycja są niewidoczne. Nie wyklucza to
 poprawy surowego wyniku, której ranking nie pokazuje.
+
+---
+
+## Faza 5 — E10: pierwsze wnioski BIOLOGICZNE (offline, 0 wywołań API)
+
+Do tej pory wszystkie 24 wnioski dotyczyły **architektury narzędzi**, nie
+promotorów. E10 jest analizą porównawczą dzikiego `pks1` wobec stu naturalnych
+promotorów *Trichoderma* — liczoną z `E03/wyniki.json`, bez sieci.
+
+### W25 — Rdzeń promotora istnieje i wychodzi z konserwacji, nie z modelu
+
+**[POTWIERDZONE]** — informacja pozycyjna w 100 promotorach wyrównanych do TSS:
+
+```
+poz.   1-700    IC 0,019-0,030 bit     tło
+poz. 701-750    IC 0,042               2,0 × tło
+poz. 751-800    IC 0,055               2,6 × tło
+poz. 798 (TSS-2)  IC 0,525  ->  A w 62/100    25 × tło    (dziki ma G)
+```
+
+Silna preferencja puryny dwie zasady przed końcem = element **Inr**.
+To zastępuje martwą historię o oknie 783–800 z `wagaP` (W10: artefakt brzegowy)
+sygnałem wyprowadzonym z danych biologicznych, niezależnym od modelu.
+
+### W26 — Rdzeń `pks1` jest **normalny** → nie ma czego w nim naprawiać
+
+**[POTWIERDZONE]** — log-odds wobec PWM ze stu naturalnych:
+
+| okno | naturalne (mediana) | dziki | percentyl |
+|---|---|---|---|
+| rdzeń 751–800 | 2,97 | **3,67** | **52 %** |
+| kontrola 401–450 | 1,35 | −0,33 | 25 % |
+
+Kontrola pokazuje, że PWM w ogóle działa. **Wynik negatywny: blok „edycja
+rdzenia" wypada z planu** — dziki ma rdzeń taki, jak reszta rodzaju.
+
+### W27 — `pks1` nie ma ani jednego miejsca CCAAT, a 81 % rodzaju ma
+
+**[POTWIERDZONE]** — skan obu nici (`CCAAT` + `ATTGG`):
+
+| motyw | dziki | mediana naturalnych | % z ≥ 1 |
+|---|---|---|---|
+| **CCAAT / ATTGG** | **0** | **2** | **81 %** |
+| CreA | 2 | 2 | 92 % |
+| Inr-podobny | 1 | 1 | 65 % |
+| TATAAA | 1 (na −457) | 0 | 43 % |
+| GC-box | 0 | 0 | 33 % |
+
+CCAAT to **jedyny** motyw, w którym dziki odstaje; przy pozostałych jest na
+medianie. Wiąże go kompleks **CBC/HAP** (HapB–HapC–HapE) — udokumentowany
+ogólny aktywator u grzybów strzępkowych: zagina DNA, przesuwa nukleosom,
+otwiera region dla maszynerii podstawowej.
+
+Naturalne trzymają te miejsca w pasie −500…−200 (mediana −388, najgęściej
+−300…−201). Dziki jest **jedno podstawienie** od pełnego CCAAT w 22 miejscach.
+
+> **Zastrzeżenie, które mówimy pierwsi:** to **nie jest anomalia statystyczna**.
+> Z samego składu zasad oczekujemy 1,62 trafienia, `P(0) = 0,20`; zera ma też
+> 19/100 naturalnych. Nie twierdzimy „`pks1` jest zubożony" — twierdzimy
+> „81 % rodzaju niesie element aktywujący, którego `pks1` nie ma, a instalacja
+> kosztuje jedno podstawienie". Do decyzji inżynierskiej to wystarcza.
+
+### W28 — Konsekwencje dla planu: trzy bloki wypadają, jeden powstaje
+
+| blok | los | powód |
+|---|---|---|
+| edycja rdzenia 783–800 | **wypada** | W10 (artefakt) + W26 (rdzeń w normie) |
+| TATAAA w −80…−30 | **wypada** | tylko 43 % rodzaju ma TATAAA, a mediana to 0 — *Trichoderma* jest w większości TATA-less; dziki ma TATA na −457 |
+| rozbicie CreA | **wypada** | dziki ma 2 miejsca, mediana rodzaju też 2 — brak przesłanki porównawczej (+ W19: efekt 0) |
+| **naszczepienie CCAAT** | **powstaje** | W27 |
+
+`v8_ccaat.fasta` = 100 ziaren z v4 (100 niezależnych skupień) + naszczepione
+miejsca CCAAT. Zachowuje różnorodność z K1 i dokłada wymiar, na który
+narzędzia są ślepe. 100/100 ziaren dostało miejsce, 0 odrzuconych w walidacji.
+
+> Uwaga na W5: obalone były **losowe** podstawienia. Tutaj każda zmiana tworzy
+> **nazwane miejsce wiązania białka** w pozycji wziętej z rozkładu naturalnego.
+> Sędzia tego nie zobaczy (mierzy prototypowość dekodera) — i to nie jest powód
+> do odrzucenia.

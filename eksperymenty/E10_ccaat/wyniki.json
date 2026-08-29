@@ -1,0 +1,194 @@
+{
+ "eksperyment": "E10_ccaat",
+ "konserwacja_okna": [
+  [
+   1,
+   0.023488505274841566
+  ],
+  [
+   51,
+   0.02231636378995516
+  ],
+  [
+   101,
+   0.023481709366489478
+  ],
+  [
+   151,
+   0.01898707425763329
+  ],
+  [
+   201,
+   0.028809183328113507
+  ],
+  [
+   251,
+   0.023622899396590347
+  ],
+  [
+   301,
+   0.02730528374703836
+  ],
+  [
+   351,
+   0.02693117103682731
+  ],
+  [
+   401,
+   0.023486173334476227
+  ],
+  [
+   451,
+   0.02128750596667305
+  ],
+  [
+   501,
+   0.02947640760815535
+  ],
+  [
+   551,
+   0.02162286049340439
+  ],
+  [
+   601,
+   0.024447440722187106
+  ],
+  [
+   651,
+   0.02780460225631452
+  ],
+  [
+   701,
+   0.04183751764831503
+  ],
+  [
+   751,
+   0.055034575384963716
+  ]
+ ],
+ "szczyt_konserwacji": {
+  "poz": 798,
+  "tss": -2,
+  "ic": 0.5247,
+  "dominujaca": "A",
+  "dziki": "G"
+ },
+ "pwm": {
+  "rdzen 751-800": {
+   "dziki": 3.67,
+   "mediana": 2.97,
+   "percentyl": 0.52
+  },
+  "kontrola 401-450": {
+   "dziki": -0.33,
+   "mediana": 1.35,
+   "percentyl": 0.25
+  }
+ },
+ "motywy": {
+  "TATA": {
+   "dziki": 1,
+   "mediana": 0.0,
+   "frakcja_z_motywem": 0.43
+  },
+  "TATA_wariant": {
+   "dziki": 2,
+   "mediana": 0.0,
+   "frakcja_z_motywem": 0.39
+  },
+  "CAAT": {
+   "dziki": 0,
+   "mediana": 2.0,
+   "frakcja_z_motywem": 0.81
+  },
+  "GC_box": {
+   "dziki": 0,
+   "mediana": 0.0,
+   "frakcja_z_motywem": 0.33
+  },
+  "Inr_like": {
+   "dziki": 1,
+   "mediana": 1.0,
+   "frakcja_z_motywem": 0.65
+  },
+  "CreA": {
+   "dziki": 2,
+   "mediana": 2.0,
+   "frakcja_z_motywem": 0.92
+  },
+  "CCAAT_obie": {
+   "dziki": 0,
+   "mediana": 2.0,
+   "frakcja_z_motywem": 0.81
+  }
+ },
+ "test_anomalii": {
+  "lambda": 1.62,
+  "p_zero": 0.197,
+  "naturalnych_z_zerem": 19
+ },
+ "gestosc_ccaat_naturalnych": {
+  "-800": 9,
+  "-750": 11,
+  "-700": 12,
+  "-650": 12,
+  "-600": 12,
+  "-550": 12,
+  "-500": 17,
+  "-450": 13,
+  "-400": 9,
+  "-350": 12,
+  "-300": 19,
+  "-250": 21,
+  "-200": 10,
+  "-150": 13,
+  "-100": 10,
+  "-50": 7
+ },
+ "wybrane_podstawienia": [
+  {
+   "poz_motywu": 546,
+   "tss": -254,
+   "jest": "CCAAC",
+   "cel": "CCAAT",
+   "poz_zmiany": 550,
+   "z": "C",
+   "na": "T",
+   "gestosc_naturalnych": 19
+  },
+  {
+   "poz_motywu": 317,
+   "tss": -483,
+   "jest": "ATTGT",
+   "cel": "ATTGG",
+   "poz_zmiany": 321,
+   "z": "T",
+   "na": "G",
+   "gestosc_naturalnych": 17
+  },
+  {
+   "poz_motywu": 355,
+   "tss": -445,
+   "jest": "CCAAC",
+   "cel": "CCAAT",
+   "poz_zmiany": 359,
+   "z": "C",
+   "na": "T",
+   "gestosc_naturalnych": 13
+  },
+  {
+   "poz_motywu": 391,
+   "tss": -409,
+   "jest": "CCACT",
+   "cel": "CCAAT",
+   "poz_zmiany": 394,
+   "z": "C",
+   "na": "A",
+   "gestosc_naturalnych": 13
+  }
+ ],
+ "dziki_z_ccaat": "TATCTGGTGTTTCATAGCGCGGCCTGCCGTTGGACGTTGCAATGCAAACGGGGCCAGAGATCAAAACTATAGGCAATCTTACGATTTCATACACACGCCCAACAAAGGATTCTCTGCCCTTACTACGTGTACCTGTATAGTGCTGTTTGCGGTCTTTTCCACCACCCCTGCTGCCGCCTCCCACCTAACAAGGTTGGGCTCGAGGCTTACAGAAACAAGAACGTCTATCGCCGAGATTCGAGCGTTACAGAGCCATTGAGGTTCGGTTTTGAGGTTGATCGATGGAAATGTATATGTGTATAAGAGTAGTAAGACTATTGGTTGTAAGATTTACATAAACATTATAAACATTCTCCAATGTAACAGGTGCAAGGGGATGCTTTTCTTCCTCCAATACTTTTTAATCGAGATTCCAAAACCCCTTCTTGGCTTTTATGTAACTAGCGGCTCTGCATGCATACAAAGTAACCCAAAGGGACTGACAAGGGGCCTCGGCCGATCAGGGGTCGAAGCCGAACGGCCGCCGACTCACTACATGAGAAGGGCCAATGGAGATGCAGCGGAGGTGCAACGTCGTAGCAAGCTCGTCATCGTCGACGAAGGATTGATGATCACCGAAGATACTTTGCGTCACGTAGGAAAGGTGTCAAGATATCACAGATAGCGAAGACTCTGAGTGATGCCCTAGATTATGGTCTTGTATATATAGGTAGGCATGGTCCCGCTACTTGGCAGCAGTCGATGCAAATTATCATTCGGCACGCTCTGAATTCATTTTCTTTTACAGAATCATCACCGCC",
+ "plik": "/sessions/zen-happy-bohr/mnt/hack-the-promoter/runs/julian/v8_ccaat.fasta",
+ "bramka_probka": null,
+ "_zebrano": "2026-08-29T16:50:51"
+}
