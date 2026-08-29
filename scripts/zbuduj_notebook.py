@@ -203,40 +203,162 @@ Osobne pole `warstwy` mówi, z którego poziomu latentu da się ruszyć daną po
 """)
 
 kod(r"""
-fig, axs = plt.subplots(2, 1, figsize=(13, 6), sharex=True,
-                        gridspec_kw={"height_ratios": [2, 1]})
+import numpy as np
 
-poz["okno20"] = ((poz["poz"] - 1) // 20) * 20 + 1
-mapa_ciepla = (poz.groupby("okno20")[["L1", "L2", "L3"]].mean().T)
-sns.heatmap(mapa_ciepla, ax=axs[0], cmap="rocket_r", cbar_kws={"label": "udział pozycji"},
-            vmin=0, vmax=1)
-axs[0].set(title="H1 · Które pozycje da się ruszyć z którego poziomu latentu",
-           ylabel="warstwa", xlabel="")
-axs[0].set_xticks([])
+fig, axs = plt.subplots(2, 1, figsize=(13, 6.4),
+                        gridspec_kw={"height_ratios": [1.15, 1]})
 
-sns.lineplot(data=poz, x="poz", y="dzwignie", ax=axs[1], lw=0.8, color="#805ad5")
-axs[1].axvspan(783, 800, color="#e53e3e", alpha=0.13)
-axs[1].set(title="Liczba dźwigni na pozycję (0 = dekoder nadpisze twoją edycję)",
-           xlabel="pozycja", ylabel="dźwigni", xlim=(1, 800))
+# --- panel gorny: pokrycie warstw wzdluz sekwencji ---
+# UWAGA: heatmapa musi byc rysowana we WSPOLRZEDNYCH POZYCJI (1-800),
+# inaczej nie da sie jej zestawic z dolnym panelem.
+OKNO = 20
+poz["okno20"] = ((poz["poz"] - 1) // OKNO) * OKNO + 1
+siatka = poz.groupby("okno20")[["L1", "L2", "L3"]].mean().T
+
+im = axs[0].imshow(siatka.values, aspect="auto", cmap="rocket_r", vmin=0, vmax=1,
+                   extent=(1, 800, 2.5, -0.5), interpolation="nearest")
+axs[0].set_yticks([0, 1, 2], ["L1", "L2", "L3"])
+axs[0].set(title="Które pozycje da się ruszyć z którego poziomu latentu "
+                 f"(średnia w oknach po {OKNO} pz)",
+           ylabel="warstwa latentu", xlim=(1, 800))
+axs[0].set_xticklabels([])
+fig.colorbar(im, ax=axs[0], label="udział pozycji z dźwignią", pad=0.01)
+
+# --- panel dolny: srednia krocząca zamiast 800 pionowych kresek ---
+poz["dzwignie_gladkie"] = poz["dzwignie"].rolling(25, center=True, min_periods=1).mean()
+sns.lineplot(data=poz, x="poz", y="dzwignie_gladkie", ax=axs[1], lw=2,
+             color="#805ad5")
+axs[1].scatter(poz.loc[poz["dzwignie"] == 0, "poz"],
+               [0.05] * (poz["dzwignie"] == 0).sum(),
+               marker="|", s=90, color="#e53e3e", label="pozycje bez dźwigni (0 warstw)")
+axs[1].axhline(poz["dzwignie"].mean(), ls="--", lw=1, color="grey")
+axs[1].text(5, poz["dzwignie"].mean() + 0.05,
+            f"średnia {poz['dzwignie'].mean():.2f} dźwigni/pozycję",
+            fontsize=9, color="grey")
+axs[1].set(title="Ile dźwigni ma pozycja — średnia krocząca (okno 25 pz)",
+           xlabel="pozycja w promotorze", ylabel="dźwigni", xlim=(1, 800),
+           ylim=(0, 2.6))
+axs[1].legend(loc="upper right", fontsize=9)
 plt.show()
 
 print("rozkład dźwigni (ile pozycji ma ile warstw):")
 print(poz["dzwignie"].value_counts().sort_index().to_string())
-print(f"\npozycji swobodnych (rekon=0)      : {(poz['rekon']==0).sum()}")
-print(f"pozycji, które dekoder nadpisze  : "
-      f"{((poz['rekon']==1) & (poz['dzwignie']==0)).sum()}")
+print(f"\npozycji z dźwignią L1: {int(poz['L1'].sum())}"
+      f" | L2: {int(poz['L2'].sum())} | L3: {int(poz['L3'].sum())}")
+print(f"pozycji swobodnych (rekon=0): {(poz['rekon']==0).sum()}")
 """)
 
 md(r"""
-**Jak to czytać w praktyce:**
+## Jak czytać ten wykres — po ludzku
 
-- `dzwignie = 0` **i** `rekon = 1` → jeśli przepuścisz sekwencję przez Nawigatora,
-  dekoder **nadpisze** twoją edycję na tej pozycji. Edytowanie jej ręcznie
-  i potem dekodowanie = strata czasu. Takich pozycji jest 64.
-- `rekon = 0` → pozycja **swobodna**, dekoder jej nie odtwarza. 89 pozycji.
-- Im więcej dźwigni, tym łatwiej ruszyć pozycję zmianą pojedynczego kodu.
+**Górny panel** to mapa gęstości. Każda kolumna to okno 20 pz sekwencji
+(od 1 po lewej do 800 po prawej), każdy wiersz to jeden poziom latentu.
+Kolor mówi, **jaki procent pozycji w tym oknie da się ruszyć zmianą jednego
+kodu tego poziomu**: jasny = prawie żadnej, ciemny = prawie wszystkie.
 
-L3 (najdrobniejszy poziom) obejmuje najwięcej pozycji — 477 z 800.
+Widać, że L3 (dolny wiersz) jest wyraźnie ciemniejszy niż L1 (górny) —
+z najdrobniejszego poziomu da się dosięgnąć **477 z 800 pozycji**,
+z najgrubszego tylko **118**. Kolor jest równomierny wzdłuż całej sekwencji,
+czyli dźwignie nie są nigdzie skupione — inaczej niż `wagaP`, które siedziało
+w jednym rogu.
+
+**Dolny panel** to średnia krocząca liczby dźwigni. Surowe dane to 800 słupków
+skaczących między 0 a 3 — nieczytelna szczotka, dlatego wygładzamy oknem 25 pz.
+Czerwone kreski przy dole zaznaczają pozycje **bez żadnej dźwigni**.
+
+Wniosek z obu paneli: **dźwignie są rozłożone równomiernie**, a średnia to
+~1,1 dźwigni na pozycję. Nie ma „gorącego miejsca", w którym jedna zmiana kodu
+przewróciłaby dużą część sekwencji.
+""")
+
+# ═══════════════════════════════════════════════════════════════════════
+md(r"""
+## Co się dzieje, gdy wyślesz sekwencję do `/nawigator/edycje`?
+
+To najczęstsze nieporozumienie, więc rozłóżmy je na eksperyment.
+Endpoint **nie zwraca twojej sekwencji z małą poprawką**. Robi trzy rzeczy:
+
+```
+twoja sekwencja  ──enkoder──▶  kody latentu  ──[podmiana ile_kodow]──▶  kody'
+                                                                          │
+                     inna sekwencja 800 pz  ◀──dekoder──────────────────┘
+```
+
+Kompresja jest **stratna**. 800 zasad nie mieści się w kilkuset kodach, więc
+przy dekodowaniu część pozycji model odtwarza z pamięci „jak zwykle wygląda
+promotor", a nie z twojego wejścia.
+""")
+
+kod(r"""
+# Wysyłamy dzikiego z MINIMALNĄ zmianą (ile_kodow=1) i patrzymy, co wraca.
+# Wynik zacache'owany w pomiarach -- tu odtwarzamy analizę.
+przyklad = [w for w in POMIARY["edycje_siatka"]
+            if w["poziom"] == 2 and w["ile_kodow"] == 1][0]
+zmienione = set(przyklad["pozycje_zmian"])
+rekon0 = set(poz.loc[poz["rekon"] == 0, "poz"])
+
+print(f"wysłałem  : dzikiego, 800 pz")
+print(f"podmieniłem: 1 kod latentu (minimum, jakie API przyjmuje)")
+print(f"dostałem  : sekwencję 800 pz różniącą się na {len(zmienione)} pozycjach\n")
+print(f"z tych {len(zmienione)} zmian:")
+print(f"   na pozycjach rekon=0 : {len(zmienione & rekon0):>3}"
+      f"  (istnieje ich {len(rekon0)})")
+print(f"   na pozycjach rekon=1 : {len(zmienione - rekon0):>3}"
+      f"  (istnieje ich {800 - len(rekon0)})")
+print(f"\npokrycie zbioru rekon=0: {len(zmienione & rekon0) / len(rekon0):.0%}")
+""")
+
+md(r"""
+## I to jest odpowiedź: `rekon` to mapa strat kompresji
+
+Zmiany dekodera trafiają **dokładnie i wyłącznie na pozycje `rekon = 0`** —
+pokrycie 100 %. To nie przypadek, to definicja:
+
+> **`rekon = 0` znaczy: „gdy przepuszczę tę sekwencję przez enkoder i dekoder,
+> ta pozycja wróci zmieniona".** To mapa 89 pozycji, których model nie potrafi
+> (albo nie uważa za potrzebne) odtworzyć.
+
+Więc na pytanie *„czy on zwróci inną sekwencję?"* — **tak, zawsze inną**,
+i to o ~89 pozycji, nawet jeśli poprosisz o minimalną możliwą zmianę.
+
+**Sprostowanie.** Wcześniej napisaliśmy, że dekoder „nadpisze twoją ręczną
+edycję" na pozycjach z zerem dźwigni. Sprawdziliśmy to i **tak nie jest**:
+""")
+
+kod(r"""
+# Wynik osobnego eksperymentu (5 pozycji z każdej klasy × 3 alternatywne zasady):
+przezycie = pd.DataFrame([
+    {"klasa pozycji": "rekon=1, dźwignie=0", "przeżyło": 13, "prób": 15},
+    {"klasa pozycji": "rekon=1, dźwignie>0", "przeżyło": 13, "prób": 15},
+    {"klasa pozycji": "rekon=0 (swobodna)",  "przeżyło": 12, "prób": 15},
+])
+przezycie["% przeżyć"] = (100 * przezycie["przeżyło"] / przezycie["prób"]).round(0)
+
+fig, ax = plt.subplots(figsize=(8.5, 3.4))
+sns.barplot(data=przezycie, y="klasa pozycji", x="% przeżyć", ax=ax, color="#38a169")
+ax.axvline(100, ls="--", color="grey", lw=1)
+ax.set(title="Czy ręczna edycja przeżywa przejście przez dekoder?",
+       xlabel="% edycji, które wróciły nienaruszone", xlim=(0, 110), ylabel="")
+for i, r in przezycie.iterrows():
+    ax.text(r["% przeżyć"] + 2, i, f"{r['przeżyło']}/{r['prób']}", va="center")
+plt.show()
+
+print(przezycie.to_string(index=False))
+""")
+
+md(r"""
+Wszystkie trzy klasy przeżywają **tak samo** (~80–87 %, różnica mieści się
+w szumie przy 15 próbach na klasę). Powód jest prosty i wcześniej go
+przeoczyliśmy: gdy wysyłasz **zmienioną** sekwencję, enkoder koduje ją od nowa —
+twoja edycja trafia do kodów, więc dekoder ją odtwarza. `rekon` opisuje
+wierność odtworzenia **konkretnej sekwencji**, a nie blokadę na przyszłe edycje.
+
+**Praktyczny wniosek jest jednak ten sam, tylko z innego powodu:**
+nie przepuszczaj ręcznie zredagowanej sekwencji przez `/edycje`. Nie dlatego,
+że straciłbyś swoją edycję (przeżyje w ~85 % przypadków), tylko dlatego, że
+**dostaniesz w prezencie ~89 innych zmian**, których nie kontrolujesz.
+Jeśli edytujesz ręcznie — zgłaszaj wynik bezpośrednio. Wyrocznia ocenia
+twoją sekwencję, nie jej rekonstrukcję.
 """)
 
 # ═══════════════════════════════════════════════════════════════════════
