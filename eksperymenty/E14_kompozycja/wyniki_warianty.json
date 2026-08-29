@@ -1,0 +1,24 @@
+{
+  "w17_pelna_kompozycja": {
+    "plik": "w17_pelna_kompozycja.fasta",
+    "n": 100,
+    "zmian_med": 68,
+    "cre1_rozbitych_med": 3
+  },
+  "w18_piec_rodzin": {
+    "plik": "w18_piec_rodzin.fasta",
+    "n": 100
+  },
+  "w19_pivot_naturalny": {
+    "plik": "w19_pivot_naturalny.fasta",
+    "n": 100
+  },
+  "w20_tylko_xbs": {
+    "plik": "w20_tylko_xbs.fasta",
+    "n": 100
+  },
+  "w21_cbh1": {
+    "plik": "w21_cbh1.fasta",
+    "n": 100
+  }
+}

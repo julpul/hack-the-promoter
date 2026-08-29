@@ -1,0 +1,279 @@
+{
+  "n": 45,
+  "pearson_konsensus": -0.0792,
+  "spearman_konsensus": -0.0452,
+  "pearson_dziki": -0.0963,
+  "spearman_dziki": -0.0668,
+  "proby": [
+    {
+      "nazwa": "A_gleb19_038",
+      "blad_odtworzenia": 19,
+      "do_konsensusu": 19,
+      "do_dzikiego": 98
+    },
+    {
+      "nazwa": "A_gleb18_026",
+      "blad_odtworzenia": 18,
+      "do_konsensusu": 22,
+      "do_dzikiego": 98
+    },
+    {
+      "nazwa": "A_gleb18_030",
+      "blad_odtworzenia": 18,
+      "do_konsensusu": 24,
+      "do_dzikiego": 105
+    },
+    {
+      "nazwa": "A_gleb19_034",
+      "blad_odtworzenia": 19,
+      "do_konsensusu": 24,
+      "do_dzikiego": 103
+    },
+    {
+      "nazwa": "A_gleb18_027",
+      "blad_odtworzenia": 18,
+      "do_konsensusu": 25,
+      "do_dzikiego": 102
+    },
+    {
+      "nazwa": "A_gleb16_013",
+      "blad_odtworzenia": 16,
+      "do_konsensusu": 27,
+      "do_dzikiego": 109
+    },
+    {
+      "nazwa": "A_gleb16_010",
+      "blad_odtworzenia": 16,
+      "do_konsensusu": 28,
+      "do_dzikiego": 106
+    },
+    {
+      "nazwa": "A_gleb17_016",
+      "blad_odtworzenia": 17,
+      "do_konsensusu": 28,
+      "do_dzikiego": 107
+    },
+    {
+      "nazwa": "A_gleb17_020",
+      "blad_odtworzenia": 17,
+      "do_konsensusu": 31,
+      "do_dzikiego": 112
+    },
+    {
+      "nazwa": "A_gleb18_029",
+      "blad_odtworzenia": 18,
+      "do_konsensusu": 31,
+      "do_dzikiego": 118
+    },
+    {
+      "nazwa": "A_gleb15_006",
+      "blad_odtworzenia": 15,
+      "do_konsensusu": 33,
+      "do_dzikiego": 113
+    },
+    {
+      "nazwa": "A_gleb16_014",
+      "blad_odtworzenia": 16,
+      "do_konsensusu": 33,
+      "do_dzikiego": 112
+    },
+    {
+      "nazwa": "A_gleb18_025",
+      "blad_odtworzenia": 18,
+      "do_konsensusu": 33,
+      "do_dzikiego": 116
+    },
+    {
+      "nazwa": "A_gleb19_037",
+      "blad_odtworzenia": 19,
+      "do_konsensusu": 33,
+      "do_dzikiego": 109
+    },
+    {
+      "nazwa": "A_gleb17_022",
+      "blad_odtworzenia": 17,
+      "do_konsensusu": 34,
+      "do_dzikiego": 109
+    },
+    {
+      "nazwa": "A_gleb18_028",
+      "blad_odtworzenia": 18,
+      "do_konsensusu": 34,
+      "do_dzikiego": 111
+    },
+    {
+      "nazwa": "A_gleb19_041",
+      "blad_odtworzenia": 19,
+      "do_konsensusu": 34,
+      "do_dzikiego": 115
+    },
+    {
+      "nazwa": "A_gleb09_000",
+      "blad_odtworzenia": 9,
+      "do_konsensusu": 35,
+      "do_dzikiego": 112
+    },
+    {
+      "nazwa": "A_gleb14_002",
+      "blad_odtworzenia": 14,
+      "do_konsensusu": 35,
+      "do_dzikiego": 115
+    },
+    {
+      "nazwa": "A_gleb16_011",
+      "blad_odtworzenia": 16,
+      "do_konsensusu": 36,
+      "do_dzikiego": 112
+    },
+    {
+      "nazwa": "A_gleb14_004",
+      "blad_odtworzenia": 14,
+      "do_konsensusu": 38,
+      "do_dzikiego": 115
+    },
+    {
+      "nazwa": "A_gleb16_008",
+      "blad_odtworzenia": 16,
+      "do_konsensusu": 38,
+      "do_dzikiego": 114
+    },
+    {
+      "nazwa": "A_gleb17_018",
+      "blad_odtworzenia": 17,
+      "do_konsensusu": 38,
+      "do_dzikiego": 112
+    },
+    {
+      "nazwa": "A_gleb19_042",
+      "blad_odtworzenia": 19,
+      "do_konsensusu": 39,
+      "do_dzikiego": 118
+    },
+    {
+      "nazwa": "A_gleb17_015",
+      "blad_odtworzenia": 17,
+      "do_konsensusu": 40,
+      "do_dzikiego": 116
+    },
+    {
+      "nazwa": "A_gleb17_017",
+      "blad_odtworzenia": 17,
+      "do_konsensusu": 40,
+      "do_dzikiego": 122
+    },
+    {
+      "nazwa": "A_gleb19_033",
+      "blad_odtworzenia": 19,
+      "do_konsensusu": 42,
+      "do_dzikiego": 114
+    },
+    {
+      "nazwa": "A_gleb13_001",
+      "blad_odtworzenia": 13,
+      "do_konsensusu": 43,
+      "do_dzikiego": 120
+    },
+    {
+      "nazwa": "A_gleb19_036",
+      "blad_odtworzenia": 19,
+      "do_konsensusu": 43,
+      "do_dzikiego": 123
+    },
+    {
+      "nazwa": "A_gleb17_021",
+      "blad_odtworzenia": 17,
+      "do_konsensusu": 44,
+      "do_dzikiego": 130
+    },
+    {
+      "nazwa": "A_gleb17_023",
+      "blad_odtworzenia": 17,
+      "do_konsensusu": 44,
+      "do_dzikiego": 123
+    },
+    {
+      "nazwa": "A_gleb15_007",
+      "blad_odtworzenia": 15,
+      "do_konsensusu": 45,
+      "do_dzikiego": 122
+    },
+    {
+      "nazwa": "A_gleb18_032",
+      "blad_odtworzenia": 18,
+      "do_konsensusu": 45,
+      "do_dzikiego": 119
+    },
+    {
+      "nazwa": "A_gleb18_024",
+      "blad_odtworzenia": 18,
+      "do_konsensusu": 46,
+      "do_dzikiego": 118
+    },
+    {
+      "nazwa": "A_gleb18_031",
+      "blad_odtworzenia": 18,
+      "do_konsensusu": 46,
+      "do_dzikiego": 114
+    },
+    {
+      "nazwa": "A_gleb19_039",
+      "blad_odtworzenia": 19,
+      "do_konsensusu": 46,
+      "do_dzikiego": 122
+    },
+    {
+      "nazwa": "A_gleb19_040",
+      "blad_odtworzenia": 19,
+      "do_konsensusu": 46,
+      "do_dzikiego": 121
+    },
+    {
+      "nazwa": "A_gleb19_035",
+      "blad_odtworzenia": 19,
+      "do_konsensusu": 47,
+      "do_dzikiego": 120
+    },
+    {
+      "nazwa": "A_gleb19_043",
+      "blad_odtworzenia": 19,
+      "do_konsensusu": 47,
+      "do_dzikiego": 119
+    },
+    {
+      "nazwa": "A_gleb16_009",
+      "blad_odtworzenia": 16,
+      "do_konsensusu": 49,
+      "do_dzikiego": 121
+    },
+    {
+      "nazwa": "A_gleb16_012",
+      "blad_odtworzenia": 16,
+      "do_konsensusu": 51,
+      "do_dzikiego": 123
+    },
+    {
+      "nazwa": "A_gleb17_019",
+      "blad_odtworzenia": 17,
+      "do_konsensusu": 51,
+      "do_dzikiego": 119
+    },
+    {
+      "nazwa": "A_gleb15_005",
+      "blad_odtworzenia": 15,
+      "do_konsensusu": 56,
+      "do_dzikiego": 127
+    },
+    {
+      "nazwa": "A_gleb14_003",
+      "blad_odtworzenia": 14,
+      "do_konsensusu": 60,
+      "do_dzikiego": 123
+    },
+    {
+      "nazwa": "A_gleb19_044",
+      "blad_odtworzenia": 19,
+      "do_konsensusu": 63,
+      "do_dzikiego": 126
+    }
+  ]
+}

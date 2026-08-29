@@ -112,11 +112,45 @@ trafiliśmy pierwszym przesiewem.
 
 ## Wynik po wgraniu
 
-*(do uzupełnienia)*
+Wgrane **2026-08-29 18:52** czasu lokalnego (16:52:28 czasu serwera).
 
-| pole | wartość |
-|---|---|
-| TOP10 | |
-| ALL100 | |
-| punkty | |
-| wniosek | |
+| pole | przed (v8_ccaat) | po v14 | zmiana |
+|---|---|---|---|
+| TOP10 | 7,0 (ranga 4) | **8,0 (ranga 3)** | +1 ranga |
+| ALL100 | 5,0 (ranga 6) | **6,0 (ranga 5)** | +1 ranga |
+| razem | 12,0 | **14,0** | **+2,0** |
+
+**Pierwsze zgłoszenie od 14:41, które pobiło nasze własne.** I to na obu
+polach naraz — a ALL100 był naszym najsłabszym.
+
+### Co ten wynik naprawdę mówi
+
+Sześć poprzednich zgłoszeń trafiało w pasmo 12–14 i wyglądało to na sufit
+metody. Nie było sufitem. Ziarna wybieraliśmy **bramką binarną** („bije
+dzikiego") i nigdy ich nie szeregowaliśmy. Ten sam mechanizm losowania,
+**posortowany po `blad_odtworzenia`**, dał +2,0 punktu.
+
+Liczby z przebiegu (1600 losowań, 74 s w 16 wątkach):
+
+```
+przez bramkę        138 / 1600   (8,6 %)
+blad_odtworzenia    9 – 21 – 39   (min/mediana/maks w całej puli)
+wybrane (blok A)    9 – 19        (45 najgłębszych)
+blok B, dystans     123 – 142 – 171   (poprzednie ziarna: 102–133)
+```
+
+Kluczowe: **9** to głębiej niż minimum naszych stu dotychczasowych ziaren
+(13). Poprzednio braliśmy pierwsze, które przeszły bramkę — czyli losową
+próbkę z pasma 13–34. Teraz bierzemy ogon rozkładu.
+
+### Czego ten wynik NIE mówi
+
+Plik miesza trzy bloki (A = głębokość 45, B = pokolenia 45, K = kontrola 10),
+więc **nie wiemy, który blok dał zysk.** Możliwe, że cały +2,0 pochodzi
+z bloku A, a blok B jest neutralny — albo odwrotnie. Rozdzielenie tego jest
+przedmiotem E14 (`eksperymenty/E14_kompozycja/PLAN.md`, sekcja o atrybucji).
+
+Metodycznie ważne: W18 („`blad_odtworzenia` nie przewiduje werdyktu Sędziego",
+d = +0,06) **nie został obalony** — został potwierdzony jako nieistotny.
+Sędzia jest wysycony i nie szereguje; głębokość szereguje. To dwie różne
+rzeczy i dobrze, że nie posłuchaliśmy Sędziego.

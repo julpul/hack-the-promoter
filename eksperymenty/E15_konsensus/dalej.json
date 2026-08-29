@@ -1,0 +1,765 @@
+{
+  "do_pokolenia": 8,
+  "linii": 140,
+  "sekund": 67,
+  "tabela": [
+    {
+      "pokolenie": 2,
+      "n": 111,
+      "blad_min": 0,
+      "blad_mediana": 5,
+      "blad_max": 15,
+      "dystans_mediana": 137
+    },
+    {
+      "pokolenie": 3,
+      "n": 106,
+      "blad_min": 0,
+      "blad_mediana": 3.0,
+      "blad_max": 11,
+      "dystans_mediana": 154.0
+    },
+    {
+      "pokolenie": 4,
+      "n": 101,
+      "blad_min": 0,
+      "blad_mediana": 2,
+      "blad_max": 7,
+      "dystans_mediana": 168
+    },
+    {
+      "pokolenie": 5,
+      "n": 100,
+      "blad_min": 0,
+      "blad_mediana": 2.0,
+      "blad_max": 10,
+      "dystans_mediana": 181.0
+    },
+    {
+      "pokolenie": 6,
+      "n": 95,
+      "blad_min": 0,
+      "blad_mediana": 2,
+      "blad_max": 7,
+      "dystans_mediana": 192
+    },
+    {
+      "pokolenie": 7,
+      "n": 92,
+      "blad_min": 0,
+      "blad_mediana": 1.0,
+      "blad_max": 9,
+      "dystans_mediana": 204.0
+    },
+    {
+      "pokolenie": 8,
+      "n": 90,
+      "blad_min": 0,
+      "blad_mediana": 1.0,
+      "blad_max": 11,
+      "dystans_mediana": 216.0
+    }
+  ],
+  "baza": [
+    {
+      "ramie": "dalej",
+      "linia": 1,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 213
+    },
+    {
+      "ramie": "dalej",
+      "linia": 4,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 210
+    },
+    {
+      "ramie": "dalej",
+      "linia": 13,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 206
+    },
+    {
+      "ramie": "dalej",
+      "linia": 25,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 216
+    },
+    {
+      "ramie": "dalej",
+      "linia": 29,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 229
+    },
+    {
+      "ramie": "dalej",
+      "linia": 31,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 213
+    },
+    {
+      "ramie": "dalej",
+      "linia": 45,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 226
+    },
+    {
+      "ramie": "dalej",
+      "linia": 47,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 206
+    },
+    {
+      "ramie": "dalej",
+      "linia": 48,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 208
+    },
+    {
+      "ramie": "dalej",
+      "linia": 53,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 200
+    },
+    {
+      "ramie": "dalej",
+      "linia": 60,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 215
+    },
+    {
+      "ramie": "dalej",
+      "linia": 62,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 211
+    },
+    {
+      "ramie": "dalej",
+      "linia": 65,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 219
+    },
+    {
+      "ramie": "dalej",
+      "linia": 77,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 223
+    },
+    {
+      "ramie": "dalej",
+      "linia": 79,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 227
+    },
+    {
+      "ramie": "dalej",
+      "linia": 82,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 228
+    },
+    {
+      "ramie": "dalej",
+      "linia": 89,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 235
+    },
+    {
+      "ramie": "dalej",
+      "linia": 90,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 207
+    },
+    {
+      "ramie": "dalej",
+      "linia": 95,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 217
+    },
+    {
+      "ramie": "dalej",
+      "linia": 98,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 204
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7007,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 225
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7009,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 219
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7010,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 208
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7030,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 210
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7031,
+      "pokolenie": 8,
+      "blad_odtworzenia": 0,
+      "dystans": 206
+    },
+    {
+      "ramie": "dalej",
+      "linia": 0,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 218
+    },
+    {
+      "ramie": "dalej",
+      "linia": 2,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 213
+    },
+    {
+      "ramie": "dalej",
+      "linia": 5,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 214
+    },
+    {
+      "ramie": "dalej",
+      "linia": 19,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 219
+    },
+    {
+      "ramie": "dalej",
+      "linia": 21,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 208
+    },
+    {
+      "ramie": "dalej",
+      "linia": 27,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 209
+    },
+    {
+      "ramie": "dalej",
+      "linia": 32,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 216
+    },
+    {
+      "ramie": "dalej",
+      "linia": 33,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 227
+    },
+    {
+      "ramie": "dalej",
+      "linia": 37,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 218
+    },
+    {
+      "ramie": "dalej",
+      "linia": 49,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 226
+    },
+    {
+      "ramie": "dalej",
+      "linia": 54,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 221
+    },
+    {
+      "ramie": "dalej",
+      "linia": 67,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 222
+    },
+    {
+      "ramie": "dalej",
+      "linia": 68,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 233
+    },
+    {
+      "ramie": "dalej",
+      "linia": 75,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 242
+    },
+    {
+      "ramie": "dalej",
+      "linia": 78,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 233
+    },
+    {
+      "ramie": "dalej",
+      "linia": 87,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 213
+    },
+    {
+      "ramie": "dalej",
+      "linia": 91,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 224
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7013,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 211
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7015,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 228
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7017,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 214
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7021,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 214
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7027,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 209
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7028,
+      "pokolenie": 8,
+      "blad_odtworzenia": 1,
+      "dystans": 217
+    },
+    {
+      "ramie": "dalej",
+      "linia": 11,
+      "pokolenie": 8,
+      "blad_odtworzenia": 2,
+      "dystans": 236
+    },
+    {
+      "ramie": "dalej",
+      "linia": 14,
+      "pokolenie": 8,
+      "blad_odtworzenia": 2,
+      "dystans": 210
+    },
+    {
+      "ramie": "dalej",
+      "linia": 28,
+      "pokolenie": 8,
+      "blad_odtworzenia": 2,
+      "dystans": 216
+    },
+    {
+      "ramie": "dalej",
+      "linia": 42,
+      "pokolenie": 8,
+      "blad_odtworzenia": 2,
+      "dystans": 211
+    },
+    {
+      "ramie": "dalej",
+      "linia": 46,
+      "pokolenie": 8,
+      "blad_odtworzenia": 2,
+      "dystans": 216
+    },
+    {
+      "ramie": "dalej",
+      "linia": 59,
+      "pokolenie": 8,
+      "blad_odtworzenia": 2,
+      "dystans": 217
+    },
+    {
+      "ramie": "dalej",
+      "linia": 61,
+      "pokolenie": 8,
+      "blad_odtworzenia": 2,
+      "dystans": 214
+    },
+    {
+      "ramie": "dalej",
+      "linia": 63,
+      "pokolenie": 8,
+      "blad_odtworzenia": 2,
+      "dystans": 209
+    },
+    {
+      "ramie": "dalej",
+      "linia": 76,
+      "pokolenie": 8,
+      "blad_odtworzenia": 2,
+      "dystans": 199
+    },
+    {
+      "ramie": "dalej",
+      "linia": 86,
+      "pokolenie": 8,
+      "blad_odtworzenia": 2,
+      "dystans": 221
+    },
+    {
+      "ramie": "dalej",
+      "linia": 97,
+      "pokolenie": 8,
+      "blad_odtworzenia": 2,
+      "dystans": 216
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7003,
+      "pokolenie": 8,
+      "blad_odtworzenia": 2,
+      "dystans": 222
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7012,
+      "pokolenie": 8,
+      "blad_odtworzenia": 2,
+      "dystans": 232
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7022,
+      "pokolenie": 8,
+      "blad_odtworzenia": 2,
+      "dystans": 212
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7,
+      "pokolenie": 8,
+      "blad_odtworzenia": 3,
+      "dystans": 224
+    },
+    {
+      "ramie": "dalej",
+      "linia": 24,
+      "pokolenie": 8,
+      "blad_odtworzenia": 3,
+      "dystans": 230
+    },
+    {
+      "ramie": "dalej",
+      "linia": 52,
+      "pokolenie": 8,
+      "blad_odtworzenia": 3,
+      "dystans": 224
+    },
+    {
+      "ramie": "dalej",
+      "linia": 84,
+      "pokolenie": 8,
+      "blad_odtworzenia": 3,
+      "dystans": 233
+    },
+    {
+      "ramie": "dalej",
+      "linia": 92,
+      "pokolenie": 8,
+      "blad_odtworzenia": 3,
+      "dystans": 213
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7000,
+      "pokolenie": 8,
+      "blad_odtworzenia": 3,
+      "dystans": 215
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7008,
+      "pokolenie": 8,
+      "blad_odtworzenia": 3,
+      "dystans": 224
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7014,
+      "pokolenie": 8,
+      "blad_odtworzenia": 3,
+      "dystans": 211
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7020,
+      "pokolenie": 8,
+      "blad_odtworzenia": 3,
+      "dystans": 214
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7026,
+      "pokolenie": 8,
+      "blad_odtworzenia": 3,
+      "dystans": 221
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7032,
+      "pokolenie": 8,
+      "blad_odtworzenia": 3,
+      "dystans": 215
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7033,
+      "pokolenie": 8,
+      "blad_odtworzenia": 3,
+      "dystans": 224
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7035,
+      "pokolenie": 8,
+      "blad_odtworzenia": 3,
+      "dystans": 211
+    },
+    {
+      "ramie": "dalej",
+      "linia": 16,
+      "pokolenie": 8,
+      "blad_odtworzenia": 4,
+      "dystans": 203
+    },
+    {
+      "ramie": "dalej",
+      "linia": 20,
+      "pokolenie": 8,
+      "blad_odtworzenia": 4,
+      "dystans": 209
+    },
+    {
+      "ramie": "dalej",
+      "linia": 64,
+      "pokolenie": 8,
+      "blad_odtworzenia": 4,
+      "dystans": 205
+    },
+    {
+      "ramie": "dalej",
+      "linia": 93,
+      "pokolenie": 8,
+      "blad_odtworzenia": 4,
+      "dystans": 226
+    },
+    {
+      "ramie": "dalej",
+      "linia": 94,
+      "pokolenie": 8,
+      "blad_odtworzenia": 4,
+      "dystans": 231
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7029,
+      "pokolenie": 8,
+      "blad_odtworzenia": 4,
+      "dystans": 207
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7039,
+      "pokolenie": 8,
+      "blad_odtworzenia": 4,
+      "dystans": 218
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7004,
+      "pokolenie": 8,
+      "blad_odtworzenia": 5,
+      "dystans": 216
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7016,
+      "pokolenie": 8,
+      "blad_odtworzenia": 5,
+      "dystans": 218
+    },
+    {
+      "ramie": "dalej",
+      "linia": 35,
+      "pokolenie": 8,
+      "blad_odtworzenia": 6,
+      "dystans": 219
+    },
+    {
+      "ramie": "dalej",
+      "linia": 51,
+      "pokolenie": 8,
+      "blad_odtworzenia": 6,
+      "dystans": 210
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7011,
+      "pokolenie": 8,
+      "blad_odtworzenia": 6,
+      "dystans": 204
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7038,
+      "pokolenie": 8,
+      "blad_odtworzenia": 7,
+      "dystans": 203
+    },
+    {
+      "ramie": "dalej",
+      "linia": 55,
+      "pokolenie": 8,
+      "blad_odtworzenia": 9,
+      "dystans": 208
+    },
+    {
+      "ramie": "dalej",
+      "linia": 72,
+      "pokolenie": 8,
+      "blad_odtworzenia": 11,
+      "dystans": 212
+    },
+    {
+      "ramie": "dalej",
+      "linia": 17,
+      "pokolenie": 7,
+      "blad_odtworzenia": 1,
+      "dystans": 216
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7006,
+      "pokolenie": 7,
+      "blad_odtworzenia": 1,
+      "dystans": 203
+    },
+    {
+      "ramie": "dalej",
+      "linia": 18,
+      "pokolenie": 6,
+      "blad_odtworzenia": 0,
+      "dystans": 191
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7001,
+      "pokolenie": 6,
+      "blad_odtworzenia": 1,
+      "dystans": 193
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7036,
+      "pokolenie": 6,
+      "blad_odtworzenia": 2,
+      "dystans": 197
+    },
+    {
+      "ramie": "dalej",
+      "linia": 12,
+      "pokolenie": 5,
+      "blad_odtworzenia": 0,
+      "dystans": 186
+    },
+    {
+      "ramie": "dalej",
+      "linia": 56,
+      "pokolenie": 5,
+      "blad_odtworzenia": 0,
+      "dystans": 186
+    },
+    {
+      "ramie": "dalej",
+      "linia": 7005,
+      "pokolenie": 5,
+      "blad_odtworzenia": 0,
+      "dystans": 185
+    },
+    {
+      "ramie": "dalej",
+      "linia": 71,
+      "pokolenie": 5,
+      "blad_odtworzenia": 1,
+      "dystans": 180
+    },
+    {
+      "ramie": "dalej",
+      "linia": 41,
+      "pokolenie": 5,
+      "blad_odtworzenia": 3,
+      "dystans": 179
+    }
+  ]
+}

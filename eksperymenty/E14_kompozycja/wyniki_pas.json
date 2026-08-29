@@ -1,0 +1,512 @@
+{
+  "eksperyment": "E14_pas_optymalny",
+  "plik": "v22_pas_optymalny.fasta",
+  "pas": [
+    115,
+    180
+  ],
+  "surowo": 198,
+  "w_pasie": 198,
+  "wybor": [
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 151
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 148
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 144
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 0,
+      "dystans": 140
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 153
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 161
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 161
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 0,
+      "dystans": 141
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 156
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 153
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 148
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 156
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 153
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 159
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 0,
+      "dystans": 128
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 152
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 139
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 160
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 141
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 0,
+      "dystans": 147
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 176
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 146
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 152
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 1,
+      "dystans": 139
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 154
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 159
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 142
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 154
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 156
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 168
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 154
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 160
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 148
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 145
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 162
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 162
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 161
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 1,
+      "dystans": 136
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 154
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 154
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 152
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 160
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 144
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 159
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 2,
+      "dystans": 144
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 153
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 145
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 2,
+      "dystans": 138
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 148
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 153
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 161
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 149
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 163
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 164
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 2,
+      "dystans": 146
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 161
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 2,
+      "dystans": 145
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 2,
+      "dystans": 123
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 145
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 163
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 174
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 171
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 145
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 159
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 147
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 3,
+      "dystans": 144
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 3,
+      "dystans": 157
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 3,
+      "dystans": 137
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 3,
+      "dystans": 133
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 3,
+      "dystans": 128
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 3,
+      "dystans": 140
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 3,
+      "dystans": 139
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 3,
+      "dystans": 138
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 3,
+      "dystans": 147
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 3,
+      "dystans": 153
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 3,
+      "dystans": 154
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 3,
+      "dystans": 164
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 3,
+      "dystans": 161
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 3,
+      "dystans": 135
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 3,
+      "dystans": 150
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 3,
+      "dystans": 138
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 3,
+      "dystans": 151
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 3,
+      "dystans": 139
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 3,
+      "dystans": 149
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 3,
+      "dystans": 140
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 3,
+      "dystans": 136
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 3,
+      "dystans": 139
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 3,
+      "dystans": 154
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 3,
+      "dystans": 167
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 3,
+      "dystans": 144
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 3,
+      "dystans": 137
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 4,
+      "dystans": 155
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 4,
+      "dystans": 152
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 4,
+      "dystans": 149
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 4,
+      "dystans": 162
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 4,
+      "dystans": 136
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 4,
+      "dystans": 142
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 4,
+      "dystans": 141
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 4,
+      "dystans": 140
+    },
+    {
+      "pokolenie": 2,
+      "blad_odtworzenia": 4,
+      "dystans": 136
+    }
+  ]
+}

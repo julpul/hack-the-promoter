@@ -1,0 +1,273 @@
+{
+  "wyniki": {
+    "konsensus_global": {
+      "blad_odtworzenia": 18,
+      "bije_dzikiego": false,
+      "do_dzikiego": 91,
+      "do_konsensusu": 0
+    },
+    "dziki": {
+      "blad_odtworzenia": 80,
+      "bije_dzikiego": false,
+      "do_dzikiego": 0,
+      "do_konsensusu": 91
+    },
+    "konsensus_blok_A": {
+      "blad_odtworzenia": 21,
+      "bije_dzikiego": false,
+      "do_dzikiego": 90,
+      "do_konsensusu": 3
+    },
+    "konsensus_blok_B": {
+      "blad_odtworzenia": 6,
+      "bije_dzikiego": false,
+      "do_dzikiego": 96,
+      "do_konsensusu": 21
+    },
+    "konsensus_blok_K": {
+      "blad_odtworzenia": 21,
+      "bije_dzikiego": false,
+      "do_dzikiego": 90,
+      "do_konsensusu": 3
+    },
+    "A_gleb09_000": {
+      "blad_odtworzenia": 9,
+      "bije_dzikiego": true,
+      "do_dzikiego": 112,
+      "do_konsensusu": 35
+    },
+    "A_gleb19_044": {
+      "blad_odtworzenia": 19,
+      "bije_dzikiego": true,
+      "do_dzikiego": 126,
+      "do_konsensusu": 63
+    },
+    "drab_A_gleb09_000_f000": {
+      "blad_odtworzenia": 9,
+      "bije_dzikiego": true,
+      "do_dzikiego": 112,
+      "do_konsensusu": 35
+    },
+    "drab_A_gleb09_000_f025": {
+      "blad_odtworzenia": 14,
+      "bije_dzikiego": false,
+      "do_dzikiego": 108,
+      "do_konsensusu": 26
+    },
+    "drab_A_gleb09_000_f050": {
+      "blad_odtworzenia": 21,
+      "bije_dzikiego": true,
+      "do_dzikiego": 105,
+      "do_konsensusu": 17
+    },
+    "drab_A_gleb09_000_f075": {
+      "blad_odtworzenia": 19,
+      "bije_dzikiego": false,
+      "do_dzikiego": 97,
+      "do_konsensusu": 9
+    },
+    "drab_A_gleb09_000_f100": {
+      "blad_odtworzenia": 18,
+      "bije_dzikiego": false,
+      "do_dzikiego": 91,
+      "do_konsensusu": 0
+    },
+    "drab_A_gleb13_001_f000": {
+      "blad_odtworzenia": 13,
+      "bije_dzikiego": true,
+      "do_dzikiego": 120,
+      "do_konsensusu": 43
+    },
+    "drab_A_gleb13_001_f025": {
+      "blad_odtworzenia": 21,
+      "bije_dzikiego": true,
+      "do_dzikiego": 113,
+      "do_konsensusu": 32
+    },
+    "drab_A_gleb13_001_f050": {
+      "blad_odtworzenia": 21,
+      "bije_dzikiego": false,
+      "do_dzikiego": 102,
+      "do_konsensusu": 21
+    },
+    "drab_A_gleb13_001_f075": {
+      "blad_odtworzenia": 24,
+      "bije_dzikiego": false,
+      "do_dzikiego": 97,
+      "do_konsensusu": 11
+    },
+    "drab_A_gleb13_001_f100": {
+      "blad_odtworzenia": 18,
+      "bije_dzikiego": false,
+      "do_dzikiego": 91,
+      "do_konsensusu": 0
+    },
+    "drab_A_gleb14_002_f000": {
+      "blad_odtworzenia": 14,
+      "bije_dzikiego": true,
+      "do_dzikiego": 115,
+      "do_konsensusu": 35
+    },
+    "drab_A_gleb14_002_f025": {
+      "blad_odtworzenia": 15,
+      "bije_dzikiego": false,
+      "do_dzikiego": 112,
+      "do_konsensusu": 26
+    },
+    "drab_A_gleb14_002_f050": {
+      "blad_odtworzenia": 18,
+      "bije_dzikiego": true,
+      "do_dzikiego": 104,
+      "do_konsensusu": 17
+    },
+    "drab_A_gleb14_002_f075": {
+      "blad_odtworzenia": 20,
+      "bije_dzikiego": false,
+      "do_dzikiego": 98,
+      "do_konsensusu": 9
+    },
+    "drab_A_gleb14_002_f100": {
+      "blad_odtworzenia": 18,
+      "bije_dzikiego": false,
+      "do_dzikiego": 91,
+      "do_konsensusu": 0
+    },
+    "drab_A_gleb14_003_f000": {
+      "blad_odtworzenia": 14,
+      "bije_dzikiego": true,
+      "do_dzikiego": 123,
+      "do_konsensusu": 60
+    },
+    "drab_A_gleb14_003_f025": {
+      "blad_odtworzenia": 21,
+      "bije_dzikiego": false,
+      "do_dzikiego": 118,
+      "do_konsensusu": 45
+    },
+    "drab_A_gleb14_003_f050": {
+      "blad_odtworzenia": 22,
+      "bije_dzikiego": false,
+      "do_dzikiego": 107,
+      "do_konsensusu": 30
+    },
+    "drab_A_gleb14_003_f075": {
+      "blad_odtworzenia": 25,
+      "bije_dzikiego": false,
+      "do_dzikiego": 94,
+      "do_konsensusu": 15
+    },
+    "drab_A_gleb14_003_f100": {
+      "blad_odtworzenia": 18,
+      "bije_dzikiego": false,
+      "do_dzikiego": 91,
+      "do_konsensusu": 0
+    },
+    "drab_A_gleb14_004_f000": {
+      "blad_odtworzenia": 14,
+      "bije_dzikiego": true,
+      "do_dzikiego": 115,
+      "do_konsensusu": 38
+    },
+    "drab_A_gleb14_004_f025": {
+      "blad_odtworzenia": 26,
+      "bije_dzikiego": false,
+      "do_dzikiego": 107,
+      "do_konsensusu": 28
+    },
+    "drab_A_gleb14_004_f050": {
+      "blad_odtworzenia": 17,
+      "bije_dzikiego": false,
+      "do_dzikiego": 107,
+      "do_konsensusu": 19
+    },
+    "drab_A_gleb14_004_f075": {
+      "blad_odtworzenia": 23,
+      "bije_dzikiego": false,
+      "do_dzikiego": 95,
+      "do_konsensusu": 10
+    },
+    "drab_A_gleb14_004_f100": {
+      "blad_odtworzenia": 18,
+      "bije_dzikiego": false,
+      "do_dzikiego": 91,
+      "do_konsensusu": 0
+    },
+    "drab_A_gleb15_005_f000": {
+      "blad_odtworzenia": 15,
+      "bije_dzikiego": true,
+      "do_dzikiego": 127,
+      "do_konsensusu": 56
+    },
+    "drab_A_gleb15_005_f025": {
+      "blad_odtworzenia": 23,
+      "bije_dzikiego": true,
+      "do_dzikiego": 114,
+      "do_konsensusu": 42
+    },
+    "drab_A_gleb15_005_f050": {
+      "blad_odtworzenia": 28,
+      "bije_dzikiego": false,
+      "do_dzikiego": 108,
+      "do_konsensusu": 28
+    },
+    "drab_A_gleb15_005_f075": {
+      "blad_odtworzenia": 28,
+      "bije_dzikiego": false,
+      "do_dzikiego": 99,
+      "do_konsensusu": 14
+    },
+    "drab_A_gleb15_005_f100": {
+      "blad_odtworzenia": 18,
+      "bije_dzikiego": false,
+      "do_dzikiego": 91,
+      "do_konsensusu": 0
+    }
+  },
+  "drabina": [
+    {
+      "frakcja": 0.0,
+      "n": 6,
+      "blad_min": 9,
+      "blad_mediana": 14.0,
+      "blad_max": 15,
+      "przez_bramke": 6,
+      "do_konsensusu": 40.5
+    },
+    {
+      "frakcja": 0.25,
+      "n": 6,
+      "blad_min": 14,
+      "blad_mediana": 21.0,
+      "blad_max": 26,
+      "przez_bramke": 2,
+      "do_konsensusu": 30.0
+    },
+    {
+      "frakcja": 0.5,
+      "n": 6,
+      "blad_min": 17,
+      "blad_mediana": 21.0,
+      "blad_max": 28,
+      "przez_bramke": 2,
+      "do_konsensusu": 20.0
+    },
+    {
+      "frakcja": 0.75,
+      "n": 6,
+      "blad_min": 19,
+      "blad_mediana": 23.5,
+      "blad_max": 28,
+      "przez_bramke": 0,
+      "do_konsensusu": 10.5
+    },
+    {
+      "frakcja": 1.0,
+      "n": 6,
+      "blad_min": 18,
+      "blad_mediana": 18.0,
+      "blad_max": 18,
+      "przez_bramke": 0,
+      "do_konsensusu": 0.0
+    }
+  ]
+}

@@ -25,6 +25,28 @@ from .config import Config
 KODY_PONAWIALNE = frozenset({500, 502, 503, 504, 520, 521, 522, 523, 524, 530})
 
 
+def rownolegle(fn, elementy, watkow: int = 16, na_blad=None):
+    """Mapuje `fn` po `elementach` w puli watkow, zachowujac kolejnosc wejscia.
+
+    Limitery w `Client` sa pod lockiem, wiec wolanie z wielu watkow jest
+    bezpieczne. Wyjatek w `fn` daje `na_blad` na tej pozycji -- pojedyncze
+    zerwane polaczenie nie moze wywrocic calego przebiegu.
+    """
+    from concurrent.futures import ThreadPoolExecutor
+
+    def bezpiecznie(x):
+        try:
+            return fn(x)
+        except Exception:                                    # noqa: BLE001
+            return na_blad
+
+    elementy = list(elementy)
+    if not elementy:
+        return []
+    with ThreadPoolExecutor(max_workers=min(watkow, len(elementy))) as pula:
+        return list(pula.map(bezpiecznie, elementy))
+
+
 class ApiError(RuntimeError):
     def __init__(self, kod: int, tresc: Any, sciezka: str):
         self.kod = kod
@@ -55,12 +77,15 @@ class RateLimiter:
             time.sleep(spac)
 
 
-# Limity z regulaminu (zapas 5%, zeby nie ocierac sie o 429).
+# Limity odczytane z /me (2026-08-29 18:39): sedzia/mapa/edycje 3000/min,
+# inne 600/min. Trzymamy 5% zapasu, zeby nie ocierac sie o 429.
+# UWAGA: wczesniej stalo tu 570/570/570 -- piec razy ponizej faktycznego
+# limitu. Kazdy eksperyment z pierwszej polowy dnia byl przez to dlawiony.
 LIMITY = {
-    "/sedzia": 570,
-    "/nawigator/mapa": 570,
-    "/nawigator/edycje": 570,
-    "_post": 228,
+    "/sedzia": 2850,
+    "/nawigator/mapa": 2850,
+    "/nawigator/edycje": 2850,
+    "_post": 570,
 }
 
 

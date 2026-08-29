@@ -1,0 +1,232 @@
+{
+  "eksperyment": "E14_pokolenia",
+  "plik": "v16_mieszanka_podkrecona.fasta",
+  "sekundy": 32,
+  "blok_B": [
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 201
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 0,
+      "dystans": 206
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 1,
+      "dystans": 230
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 192
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 210
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 233
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 200
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 2,
+      "dystans": 220
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 3,
+      "dystans": 222
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 3,
+      "dystans": 221
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 3,
+      "dystans": 201
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 3,
+      "dystans": 224
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 3,
+      "dystans": 226
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 3,
+      "dystans": 211
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 3,
+      "dystans": 204
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 4,
+      "dystans": 232
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 4,
+      "dystans": 203
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 4,
+      "dystans": 236
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 4,
+      "dystans": 235
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 4,
+      "dystans": 208
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 5,
+      "dystans": 212
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 5,
+      "dystans": 227
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 5,
+      "dystans": 262
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 5,
+      "dystans": 212
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 6,
+      "dystans": 210
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 6,
+      "dystans": 213
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 6,
+      "dystans": 211
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 6,
+      "dystans": 225
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 6,
+      "dystans": 218
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 6,
+      "dystans": 192
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 6,
+      "dystans": 215
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 7,
+      "dystans": 229
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 7,
+      "dystans": 208
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 7,
+      "dystans": 221
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 7,
+      "dystans": 206
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 7,
+      "dystans": 192
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 8,
+      "dystans": 221
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 8,
+      "dystans": 209
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 8,
+      "dystans": 213
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 8,
+      "dystans": 241
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 9,
+      "dystans": 232
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 9,
+      "dystans": 229
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 10,
+      "dystans": 197
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 10,
+      "dystans": 226
+    },
+    {
+      "pokolenie": 3,
+      "blad_odtworzenia": 11,
+      "dystans": 214
+    }
+  ]
+}

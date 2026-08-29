@@ -222,14 +222,25 @@ def main() -> int:
         rek = F.czytaj(baza)
         print(f"\n[6] NASZCZEPIENIE na {len(rek)} ziaren z {baza.name}")
         udane = 0
+        koncowe = []
         for r in rek:
-            k_lokalne = kandydaci_ccaat(r.seq, gestosc)[:args.miejsc]
+            juz = len(obie_nici(r.seq, "CCAAT"))
+            # dawka DOCELOWA liczy miejsca, ktore ziarno juz ma; dawka DODANA ich nie widzi.
+            # v8 uzywal dodanej i wyszedl na medianie 4 przy naturalnych 2.
+            ile = max(0, args.docelowo - juz) if args.docelowo else args.miejsc
+            k_lokalne = kandydaci_ccaat(r.seq, gestosc, cel_tss)[:ile] if ile else []
             nowa = nanies(r.seq, k_lokalne) if k_lokalne else r.seq
             if F.problemy(nowa) or nowa in {s for _, s in wyjscie}:
                 nowa = r.seq
-            udane += len(obie_nici(nowa, "CCAAT")) > len(obie_nici(r.seq, "CCAAT"))
+            udane += len(obie_nici(nowa, "CCAAT")) > juz
+            koncowe.append(len(obie_nici(nowa, "CCAAT")))
             wyjscie.append((f"{r.nazwa}_ccaat", nowa))
+        poz_nasze = [p - TSS for _, s in wyjscie for p in obie_nici(s, "CCAAT")]
         print(f"    ziaren z dodanym miejscem CCAAT: {udane}/{len(rek)}")
+        print(f"    miejsc na sekwencje: min {min(koncowe)} mediana {st.median(koncowe):.0f} "
+              f"max {max(koncowe)}   (naturalne: {st.median(licz_nat):.0f})")
+        print(f"    mediana pozycji: TSS{st.median(poz_nasze):+.0f}   "
+              f"(naturalne: TSS{med_nat:+.0f})")
         rap = F.waliduj([F.Rekord(n, s) for n, s in wyjscie])
         print("    " + rap.podsumowanie().replace("\n", "\n    "))
         F.zapisz(Path(args.wyjscie), [(r.nazwa, r.seq) for r in rap.ok[:100]])
