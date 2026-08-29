@@ -22,3 +22,14 @@ dziki:
 
 clean:
 	find . -name __pycache__ -type d -exec rm -rf {} + 2>/dev/null || true
+
+notebook:        ## przebuduj i wykonaj hipotezy.ipynb
+	.venv/bin/python scripts/zbuduj_notebook.py
+	.venv/bin/jupyter nbconvert --to notebook --execute --inplace hipotezy.ipynb --ExecutePreprocessor.timeout=600
+	.venv/bin/jupyter nbconvert --to html hipotezy.ipynb --output hipotezy.html
+
+pomiary:         ## odswiez data/pomiary.json z API
+	.venv/bin/python scripts/zbierz_pomiary.py
+
+venv:            ## srodowisko do notebooka
+	python3 -m venv .venv && .venv/bin/pip install -q seaborn pandas matplotlib jupyter nbconvert ipykernel

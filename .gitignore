@@ -13,3 +13,7 @@ runs/*
 data/*
 !data/.gitkeep
 !data/README.md
+
+# srodowisko notebooka
+.venv/
+hipotezy.html
