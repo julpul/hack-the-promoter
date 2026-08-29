@@ -647,3 +647,30 @@ jest **zgrubny**, ale wskazuje właściwy kierunek. Nie unieważnia to W4
 Zastrzeżenie: v8 (CCAAT) **nie przechodzi bramki**, a punktuje niemal tak samo
 jak portfele, które ją przechodzą. Czyli bramka wskazuje **jedną z kilku**
 dróg na plateau, nie jedyną.
+
+
+### W28 — Ranking interwencji liczony od linii bazowej
+
+**[POTWIERDZONE]** — dopiero W25 pozwolil ustawic te wyniki na jednej skali.
+
+| interwencja | zmiana | TOP10 | ALL100 | punkty | **zysk nad baza** |
+|---|---|---|---|---|---|
+| B0 dziki + 1 pz | 1 pz | 9 | 8 | 5,0 | — |
+| **B1 poli(dA:dT)** | ~64 pz | **6** | **8** | **8,0** | **+3,0** |
+| v8 CCAAT | 5–15 pz | 5 | 4 | 13,0 | **+8,0** |
+| v4 ziarno dekodera | ~100 pz | 4 | 4 | 14,0 | **+9,0** |
+
+Dwie rzeczy warte odnotowania.
+
+**Poli(dA:dT) dziala, ale slabo i asymetrycznie.** TOP10 poprawia sie o trzy
+pozycje (9 -> 6), a **ALL100 nie rusza sie wcale** (8 -> 8). Czyli trakty
+podnosza najlepsze sekwencje, ale nie podnosza sredniej — prawdopodobnie
+przesuniecie skladu (mediana GC 47,5 % -> 41,8 %) kosztuje tyle, ile daje
+otwarcie chromatyny. Hipoteza NFR nie jest obalona, ale **natezenie bylo za duze**.
+
+**CCAAT pozostaje najwydajniejsza edycja.** 15 pz daje +8,0, czyli 89 % zysku
+calej maszynerii dekodera przy ~7 % liczby zmienionych zasad.
+
+> Konsekwencja dla kombinacji: os CCAAT i os ziarna sa mocne, os traktow slaba
+> i szkodliwa dla sredniej. Portfel kombinowany powinien byc **CCAAT-centryczny**,
+> z traktami najwyzej jako mniejszosciowy zaklad, a nie w 80 % sekwencji.

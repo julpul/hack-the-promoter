@@ -73,9 +73,12 @@ def zbuduj(dziki: str) -> list[F.Rekord]:
     out = []
 
     for i, z in enumerate(ziarna[:CEL]):
-        # GRADIENT: natezenie rosnie wraz z indeksem, cyklicznie po obu osiach
-        n_ccaat = i % 4               # 0..3 boksow CCAAT
-        n_traktow = (i // 4) % 5      # 0..4 traktow poli(dA:dT)
+        # GRADIENT wazony wg W28: os CCAAT jest silna (+8,0 nad baza), os
+        # traktow slaba i szkodliwa dla sredniej (+3,0, ALL100 bez zmiany).
+        # Stad CCAAT rozlozone na calej puli, trakty tylko w 25 sekwencjach
+        # i w mniejszym natezeniu -- jako zaklad mniejszosciowy, nie domyslny.
+        n_ccaat = 1 + (i % 4)         # 1..4 boksow CCAAT (0 nie ma sensu -- W28)
+        n_traktow = (i % 8) - 5 if i % 8 >= 6 else 0   # 1..2 trakty w 25 % puli
         s = z.seq
         zajete: list[tuple[int, int]] = []
 
