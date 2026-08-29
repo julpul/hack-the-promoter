@@ -674,3 +674,43 @@ calej maszynerii dekodera przy ~7 % liczby zmienionych zasad.
 > Konsekwencja dla kombinacji: os CCAAT i os ziarna sa mocne, os traktow slaba
 > i szkodliwa dla sredniej. Portfel kombinowany powinien byc **CCAAT-centryczny**,
 > z traktami najwyzej jako mniejszosciowy zaklad, a nie w 80 % sekwencji.
+
+
+### W29 — SPROSTOWANIE W26 + pelne zestawienie od linii bazowej
+
+**[REWIZJA]** — W26 opieral sie na blednym zalozeniu, ze `v8_ccaat.fasta` to
+„dziki + CCAAT". Sprawdzenie zawartosci pliku: etykiety `z000_p1k16_6_ccaat`,
+dystans od dzikiego **106–137 pz**. To sa **ziarna dekodera + boksy CCAAT**,
+a nie 15-zasadowa edycja dzikiego. Zdanie „CCAAT odzyskuje 90 % zysku przy
+15 pz" jest **nieprawdziwe** i zostaje wycofane.
+
+Pelne zestawienie wszystkich zgloszen, uporzadkowane wg tego, co faktycznie
+zawieraly:
+
+| plik | baza | dodatek | punkty | TOP10 |
+|---|---|---|---|---|
+| `v11_B2_chimery_P1` | chimery z obcymi promotorami | — | **4,0** | 9 |
+| `v9_B0_linia_bazowa` | dziki | 1 podstawienie | **5,0** | 9 |
+| `v10_B1_poliAT` | dziki | trakty poli(dA:dT) | **8,0** | 6 |
+| `v3` / `v4` / `v5` | ziarna dekodera | — / gatunek | **13–14** | 4 |
+| **`v8_ccaat`** | **ziarna dekodera** | **boksy CCAAT** | 13,0 | 5 |
+
+**`v8_ccaat` jest naszym najlepszym zgloszeniem.** Ranking pokazuje przy nas
+znacznik **14:53:25**, a serwer trzyma najlepsze zgloszenie po **surowym**
+wyniku TOP10 (pozycje sie przesuwaja wraz z polem, surowy wynik nie). Czyli
+kombinacja **ziarno + CCAAT** ma nasz najwyzszy surowy TOP10 — wyzszy niz same
+ziarna, mimo ze w momencie wgrania pokazywala gorsza *pozycje*.
+
+### W30 — Baza ma znaczenie: obce DNA szkodzi
+
+**[POTWIERDZONE]** — B2 (chimery z pieciu promotorow szczepu P1) dalo **4,0**,
+czyli **ponizej linii bazowej (5,0)**. Jedyne zgloszenie gorsze od nietknietego
+dzikiego.
+
+Wszystko, co oddala sekwencje od promotora `pks1` w strone innego promotora,
+**pogarsza wynik** — nawet jesli dawca pochodzi z tego samego szczepu.
+Hipoteza „drugi punkt startowy" jest obalona ostatecznie (razem z W12: 0/100
+naturalnych bilo dzikiego u Sedziego).
+
+> Wniosek dla kierunku: **nie zmieniamy bazy.** Baza to `pks1` przepuszczony
+> przez dekoder. Optymalizujemy wylacznie **dodatki** na tej bazie.
