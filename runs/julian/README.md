@@ -28,6 +28,30 @@ naszym najlepszym.
 | `v11_B2_chimery_P1` | chimery z P1 | — | 9 | 9 | **4,0** | **poniżej bazy** — obce DNA szkodzi |
 | `v12_kombinacja` | ziarna | CCAAT + trakty | — | — | — | zbudowane, niewgrane |
 | `v13_uas_swiatlo` | ziarna | tandem UAS / LRE / CreA | — | — | — | zbudowane, niewgrane |
+| `v14_glebokosc` | ziarna sortowane po głębokości + pok. 2/3 | — | 3 | 5 | 14,0 | pobiło v8 |
+| **`v14_glebokosc_v2`** | **100 × pokolenie 4, linie niezależne** | — | 5 | 5 | 12,0 | **NASZE NAJLEPSZE** (znacznik **17:34:45**) |
+| `v18_pokolenia_cis` | pokolenie 4 | CCAAT ×4 + IR-XBS + CreA rozbite | 5 | 5 | 12,0 | **nie pobiło v2** — bloki cis szkodzą |
+| `v19_pokolenie8` | 100 × pokolenie 8 | — | 5 | 5 | 12,0 | **nie pobiło v2** — za daleko |
+
+> **Uwaga o punktach 12,0 przy trzech ostatnich.** To są **rangi**, nie surowy
+> wynik. Między `v14` (18:52) a `v2` (19:34) trzy drużyny wgrały lepsze pliki
+> (`druzyna_04` 16:54, `druzyna_10` 17:02, `druzyna_03` 17:24 czasu serwera),
+> a `druzyna_02` doszła do kompletu 10/10. Nasza ranga spadła, choć surowy
+> wynik wzrósł. Nie da się tego odczytać z punktów — patrz metoda niżej.
+
+### Metoda odczytu: znacznik czasu zamiast punktów
+
+Serwer trzyma **najlepsze** zgłoszenie po **surowym** TOP10, nie ostatnie.
+Potwierdzone eksperymentalnie w tej sesji: `v18` wgrany o 17:50 i `v19` o 20:08
+**nie ruszyły** znacznika 17:34:45. Czyli:
+
+```
+znacznik SIE RUSZYL  ->  nowy plik ma wyzszy surowy TOP10
+znacznik STOI        ->  nowy plik jest gorszy, serwer trzyma poprzedni
+```
+
+To jedyny dostępny odczyt surowego wyniku i **jedyny sposób porównania
+zgłoszeń z różnych godzin**. Punkty z różnych godzin nie są porównywalne.
 
 ---
 

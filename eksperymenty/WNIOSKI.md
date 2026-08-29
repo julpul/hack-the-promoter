@@ -714,3 +714,150 @@ naturalnych bilo dzikiego u Sedziego).
 
 > Wniosek dla kierunku: **nie zmieniamy bazy.** Baza to `pks1` przepuszczony
 > przez dekoder. Optymalizujemy wylacznie **dodatki** na tej bazie.
+
+
+---
+
+## Faza 6 — E15: konsensus, os pokolen i optimum wewnetrzne
+
+### W31 — Sekwencja konsensusowa jest gorsza od kazdego ze skladnikow
+
+**[POTWIERDZONE]** — pomiar, nie argument.
+
+Uzgodnienie 100 sekwencji `v14_glebokosc` kolumna po kolumnie (uliniowienie
+trywialne: 800 pz, ACGT, zero przerw — dekoder robi tylko podstawienia).
+
+Konsensus **nie wraca do dzikiego**, wbrew przewidywaniu z W21: lezy 91 pz od
+niego, a w **kazdej** z tych 91 kolumn dziki jest w mniejszosci, czesto
+z udzialem 0,00. Dekoder ma silny powtarzalny podpis:
+
+```
+ziarno = konsensus (skladowa systematyczna, 91 pz) + ~51 pz wlasnego szumu
+```
+
+Ale jako kandydat konsensus przegrywa na obu osiach naraz:
+
+| sekwencja | `blad_odtworzenia` | bramka |
+|---|---|---|
+| dziki | 80 | — |
+| **konsensus** | **18** | **nie przechodzi** |
+| najglebsze ziarno | **9** | przechodzi |
+
+Rozstrzyga **drabina odszumiania** (ziarno przyciagane do konsensusu
+w 0/25/50/75/100 % wlasnych pozycji, n = 6):
+
+| frakcja | `blad` (mediana) | bramka |
+|---|---|---|
+| 0,00 | **14,0** | **6/6** |
+| 0,25 | 21,0 | 2/6 |
+| 0,50 | 21,0 | 2/6 |
+| 0,75 | 23,5 | 0/6 |
+| 1,00 | 18,0 | 0/6 |
+
+> To, co wyglada na „szum" pojedynczego ziarna, **nie jest szumem** — jest
+> czescia lezenia na rozmaitosci. Usrednienie dwoch poprawnych punktow
+> zakrzywionej rozmaitosci daje punkt **poza** nia (srednia zdjec twarzy nie
+> jest twarza; srednia punktow na sferze lezy w jej wnetrzu).
+> Biologicznie to samo zdanie: **konsensus jest konstruktem statystycznym,
+> nie sekwencja funkcjonalna.**
+
+### W32 — Dekoder sam znalazl element Inr na pozycji 798
+
+**[POTWIERDZONE]** — zbieznosc dwoch niezaleznych zrodel.
+
+Dekoder zmienia `G -> A` na poz. 798 w **100/100** sekwencji. Niezaleznie
+W25 zmierzyl w stu naturalnych promotorach: poz. 798 (TSS-2) ma **IC 0,525,
+A w 62/100, 25 x tlo** — najbardziej informatywna kolumna calego okna.
+
+Model uczony na sekwencjach i genomika porownawcza 19 gatunkow wskazuja
+te sama zasade na tej samej pozycji, a dekoder nie widzial naszych stu
+naturalnych promotorow. Najmocniejszy pojedynczy wynik biologiczny projektu.
+
+### W33 — Blok B byl calym zyskiem v14; os pokolen ma optimum na 4
+
+**[POTWIERDZONE]** — atrybucja v14 + trzy zgloszenia kontrolne.
+
+Rozdzielenie blokow v14 (`E13/wyniki.json`):
+
+| blok | co to bylo | `blad_odtworzenia` |
+|---|---|---|
+| A (45) | pokolenie 1, **wybrane 45 najglebszych ze 138** z 1600 losowan | 9 – 17 – 19 |
+| B (45) | pokolenie 2/3, **bez selekcji na glebokosc** | **0 – 4 – 9** |
+
+**44 z 45 sekwencji bloku B sa glebsze niz najglebsza z calego bloku A.**
+Drugie przejscie przez dekoder daje za darmo wiecej glebokosci niz przesiew
+1600 losowan pokolenia 1. Przesiewanie mocniej na pokoleniu 1 goni ogon,
+ktory pokolenie 2 podaje z reki.
+
+Pelna os (140 linii, pokolenia 2–8):
+
+| pokolenie | `blad` min-med-max | dystans (med) | wynik zgloszenia |
+|---|---|---|---|
+| 1 (przesiew 1600) | 9 – 17 – 19 | 115 | w `v14` |
+| 2 | 0 – 5 – 15 | 137 | |
+| 3 | 0 – 3 – 11 | 154 | |
+| **4** | 0 – 2 – 7 | **168** | **`v2` — POBILO v14** |
+| 5 | 0 – 2 – 10 | 181 | |
+| 6 | 0 – 2 – 7 | 192 | |
+| 7 | 0 – 1 – 9 | 204 | |
+| 8 | 0 – 1 – 11 | 216 | `v19` — **nie pobilo v2** |
+
+**Os pokolen ma optimum WEWNETRZNE na pokoleniu ~4.** Nie jest monotoniczna:
+`v14` (mieszanka pok. 1 + 2/3) przegrywa z `v2` (pok. 4), a `v19` (pok. 8)
+tez przegrywa z `v2`. Glebokosc nasyca sie juz na 4 (mediana 2, min 0),
+wiec za optimum odpowiada **dystans**, nie glebokosc.
+
+### W34 — Glebokosc startu nie przenosi sie na potomka (kontrola do W20)
+
+**[POTWIERDZONE]** — 2 ramiona po 30 linii.
+
+Start ze **zwyklego** ziarna v4 vs ze **glebokiego** ziarna v14/blok A:
+
+| pokolenie | start zwykly | start gleboki |
+|---|---|---|
+| 2 | 5,0 | 5,0 |
+| 3 | 3,0 | 2,0 |
+| **4** | **2,0** | **2,0** |
+| 5 | 2,0 | 2,5 |
+
+Zbiegaja do tego samego dna — **linia zapomina, skad wyszla.** To W20
+(„liczy sie ziarno, nie operator") przeniesione o poziom wyzej i tam
+**obalone**: na osi pokolen ziarno startowe nie decyduje o niczym.
+
+### W35 — Bloki cis kosztuja glebokosc i nie zwracaja jej (zamkniecie tematu)
+
+**[POTWIERDZONE]** — czwarty i ostatni pomiar tej osi.
+
+Konsensus ujawnil, ze dekoder **pogarsza** sekwencje w wymiarach niewidocznych
+dla Sedziego: **dokłada represor** (CreA: dziki 2 -> konsensus 4) i **usuwa
+aktywator** (szeroki XBS: 3 -> 1). To bylo najlepsze uzasadnienie blokow cis,
+jakie mielismy — liczone wobec naszej wlasnej bazy, nie z literatury.
+
+`v18` = te same 100 baz co `v2` + CCAAT x4 + IR-XBS + rozbite CreA
+(29–33–38 pz zmian). Zmierzony koszt:
+
+```
+blad_odtworzenia   przed  0 - 1,0 -  2
+                   po     4 - 6,0 - 11      koszt +5,0
+bramka             34/40 przechodzi
+```
+
+**Znacznik w rankingu nie drgnal** — `v18` jest gorszy od `v2`.
+Razem z `v8`, `v12` i `v13` to **cztery** pomiary tej osi, ostatni z czysta
+kontrola (jedyna zmienna = bloki). **Temat CCAAT/XBS zamkniety.**
+
+### W36 — Znacznik czasu w /ranking jako jedyny odczyt surowego wyniku
+
+**[POTWIERDZONE]** — metoda, nie wynik, ale bez niej trzy powyzsze wnioski
+byłyby nieodczytywalne.
+
+Serwer trzyma **najlepsze** zgloszenie po **surowym** TOP10. Potwierdzone
+dwukrotnie w tej sesji: `v18` (17:50) i `v19` (20:08) nie ruszyly znacznika
+`17:34:45`. Zatem znacznik sie rusza wtedy i tylko wtedy, gdy nowy plik ma
+wyzszy surowy TOP10.
+
+> **Pulapka, w ktora wpadlismy.** `v2` dal „tyle samo punktow co v14" i zostal
+> odczytany jako porazka. W rzeczywistosci **znacznik przesunal sie z 16:52:28
+> na 17:34:45** — surowy wynik wzrosl. Rownoczesnie trzy druzyny wgraly lepsze
+> pliki, wiec nasza *ranga* spadla. Punkty z roznych godzin nie sa
+> porownywalne; znacznik jest.
