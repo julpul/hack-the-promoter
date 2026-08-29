@@ -44,15 +44,40 @@ spoza treningu.
 
 ## 2. Trzy modele, dwa dostępne
 
-| model | dostęp | zwraca | kontekst genu |
+| model | dostęp | zwraca | zakres rozumienia |
 |---|---|---|---|
-| **Sędzia** | tak | dla pary sekwencji: która silniejsza | **nie zna** genu ani gatunku |
-| **Nawigator** | tak | mapa pozycji + propozycje edycji | **nie zna** genu ani gatunku |
-| **Wyrocznia** | **nie** | ocena punktowa zgłoszeń | **zna** kontekst `pks1` |
+| **Sędzia** | tak | dla pary: która silniejsza | **wąski**: tylko „co jest promotorem" / „który bardziej promotorowy" |
+| **Nawigator** | tak | mapa pozycji + propozycje edycji | **szeroki**: odpowiada z kontekstu biologicznego |
+| **Wyrocznia** | **nie** | ocena punktowa zgłoszeń | zna kontekst genu `pks1` |
+
+[Z DOKUMENTACJI, przekazane przez organizatorów 2026-08-29]
+Sędzia wie w zasadzie tylko tyle, **który z pary jest silniejszym promotorem albo
+co w ogóle jest promotorem**. Nawigator ma **istotnie szerszy obszar rozumienia
+biologicznego**.
 
 Żadne dostępne narzędzie nie zwraca liczby. Jedyny sygnał od Wyroczni to pozycja
 w rankingu po wgraniu — czyli **dwie liczby zbiorcze na 5 minut**, bez atrybucji
 do pojedynczych sekwencji.
+
+### 2.1 Konsekwencja: podział ról między narzędziami
+
+To przeformułowuje całą strategię i tłumaczy pomiary z sekcji 4.
+
+**Sędzia jest bramką, nie funkcją celu.** Jego oś dyskryminacji to
+„promotorowatość", nie siła dla konkretnego genu. [HIPOTEZA, spójna z 4.4 i 4.5]
+Dlatego nie rozdziela pojedynczych podstawień: dziki *już jest* promotorem, więc
+drobna zmiana nie przesuwa go po tej osi. I dlatego warianty z dekodera wygrywają
+w ~40 % — dekoder produkuje **prototypy** wyuczonej rozmaitości, a prototyp jest
+bardziej „promotorowy" niż dowolna pojedyncza sekwencja naturalna.
+
+Właściwe użycie Sędziego: pytanie **„czy nadal jest to promotor / czy czegoś nie
+zepsułem"**. Nie: „czy jest silniejszy dla `pks1`" — na to pytanie on nie umie
+odpowiedzieć.
+
+**Nawigator jest głównym źródłem sygnału biologicznego.** Ma kanał gatunku,
+głowicę promotorową i atrybucję na poziomie pozycji (`wagaP`). Przy sprzeczności
+między Nawigatorem a Sędzią **domyślnie ufamy Nawigatorowi**, bo Sędzia operuje
+na uboższej osi.
 
 **Konsekwencja metodologiczna:** eksperymenty z rozdzielczością na pojedynczą
 sekwencję da się robić **wyłącznie u Sędziego**. Wgranie nie nadaje się do
@@ -131,11 +156,23 @@ Szczyt: poz. 788 = 1,000; 789 = 0,995; 790 = 0,992 … 800 = 0,946; poz. 783 = 0
 rdzeń promotora. **Alternatywna hipoteza, nieodrzucona: artefakt brzegowy sieci
 konwolucyjnej.** Do rozstrzygnięcia.
 
-### 4.2 Rekomendacje gatunkowe nie poprawiają siły [ZMIERZONE]
+### 4.2 Rekomendacje gatunkowe: werdykt Sędziego jest tu NIEMIARODAJNY [ZMIERZONE + REWIZJA]
 
 Dziewięć rekomendacji: poz. 154, 287, 362, 430, 434, 648, 750, 754, 778 —
-wszystkie o `wagaP` 0,013–0,144, czyli poza oknem uwagi. Wariant z naniesionymi
-wszystkimi dziewięcioma (**`z_mapy`**) **przegrywa z dzikim** u Sędziego.
+wszystkie o `wagaP` 0,013–0,144, czyli poza oknem uwagi głowicy promotorowej.
+Wariant z naniesionymi wszystkimi dziewięcioma (**`z_mapy`**) **przegrywa
+z dzikim** u Sędziego.
+
+**REWIZJA po informacji z sekcji 2.** Wcześniejszy wniosek („rekomendacje nie
+poprawiają siły") **był błędny metodologicznie**. `zmien_na` to dopasowanie
+**pod szczep P1**, a Sędzia nie zna gatunku — mierzy tylko promotorowatość.
+Dopasowanie gatunkowe może obniżać prototypowość, a jednocześnie **podnosić
+ocenę Wyroczni**, która ocenia w kontekście `pks1` i P1.
+
+Innymi słowy: odrzuciliśmy edycje gatunkowe na podstawie werdyktu modelu, który
+z definicji nie widzi gatunku. To jeden z najbardziej prawdopodobnych błędów
+w dotychczasowym podejściu. **Warianty gatunkowo dopasowane należy umieścić
+w puli mimo przegranej u Sędziego** i sprawdzić efekt na rankingu.
 
 ### 4.3 Pokrętło `ile_kodow` prawie nie działa [ZMIERZONE]
 
@@ -221,23 +258,35 @@ różnią się w regionie o zerowym gradiencie, przy nietkniętym rdzeniu.
 
 ---
 
-## 6. Ostrzeżenie o Sędzim
+## 6. Ostrzeżenie o Sędzim — prawo Goodharta
 
-[Z DOKUMENTACJI, przekazane przez organizatorów, niezweryfikowane]
-Sędzia jest starszym modelem preferującym sekwencje „bardziej promotorowe".
+[Z DOKUMENTACJI, przekazane przez organizatorów]
+Sędzia jest starszym modelem o wąskim zakresie: rozstrzyga „co jest promotorem"
+i „który z pary bardziej promotorowy".
 
-To klasyczne prawo Goodharta. Optymalizowanie Sędziego do wysycenia grozi
-dojściem do sekwencji naszpikowanej TATA-boxami — maksymalnie „promotorowej"
-i biologicznie bezsensownej. Sędzia **nie zna kontekstu `pks1`**, Wyrocznia zna.
+Optymalizowanie go do wysycenia prowadzi do sekwencji naszpikowanej TATA-boxami:
+maksymalnie prototypowej i biologicznie bezsensownej. Realnie taki konstrukt bywa
+martwy — stłoczone miejsca wiązania konkurują ze sobą, a nadekspresja bywa
+toksyczna dla komórki.
+
+**Objaw rozjazdu widoczny już w naszych danych:** cała pula 100 sekwencji to
+wyjścia dekodera, czyli prototypy. Efekt — pozycja 1 w ALL100 (każda wygląda jak
+poprawny promotor) i pozycja 2 w TOP10 (żadna się nie wyróżnia). Sędzia doprowadził
+nas dokładnie tam, dokąd prowadzi jego oś: do jednorodnej przeciętności powyżej progu.
 
 Zalecenia:
-- traktować Sędziego jako **filtr odrzucający zepsute warianty**, nie jako cel;
+- Sędzia = **bramka „czy nadal to promotor"**, nie funkcja celu do maksymalizacji;
+- przy sprzeczności z Nawigatorem **ufać Nawigatorowi** (szerszy kontekst biologiczny);
+- **nie odrzucać wariantów tylko dlatego, że przegrały u Sędziego** — dotyczy to
+  w szczególności edycji gatunkowych (patrz 4.2);
 - nie przyjmować edycji bez uzasadnienia biologicznego (Jury o to zapyta);
-- utrzymywać różnorodność puli — nie wiadomo, gdzie proxy rozjeżdża się z celem;
+- utrzymywać różnorodność puli;
 - **jedynym prawdziwym sygnałem jest ranking po wgraniu.**
 
 Test rozjazdu wart wykonania: zbudować celowo przesadzoną sekwencję (kilkanaście
 TATA), sprawdzić reakcję Sędziego, wysłać w puli i zobaczyć, czy ranking drgnie.
+Jeśli Sędzia ją kocha, a ranking nie rośnie — mamy udokumentowany rozjazd proxy
+i gotowy slajd na prezentację.
 
 ---
 
@@ -265,6 +314,20 @@ TATA), sprawdzić reakcję Sędziego, wysłać w puli i zobaczyć, czy ranking d
    pojedynek → przyjmij jeśli wygrał → powtórz z nowej bazy. Nietestowane.
 8. **Jak wygląda `wagaP` dla wariantu, który wygrał?** Czy zwycięzcy mają
    inny rozkład gradientu niż przegrani? Potencjalnie tania funkcja zastępcza.
+9. **[PRIORYTET] Czy edycje gatunkowe pomagają Wyroczni, mimo przegranej
+   u Sędziego?** Patrz 4.2. Test: pula złożona z wariantów gatunkowo dopasowanych
+   (rekomendacje `zmien_na` nanoszone pojedynczo i w kombinacjach), wgrana mimo
+   negatywnego werdyktu Sędziego. Jeśli ranking wzrośnie — cała dotychczasowa
+   selekcja była filtrowana złym kryterium.
+10. **Czy `zmien_na` zmienia się dla sekwencji już zmodyfikowanych?** Nawigator
+   liczy rekomendacje dla podanej sekwencji. Iteracja „nanieś → poproś o nowe
+   rekomendacje → nanieś" może zbiegać do sekwencji maksymalnie dopasowanej do P1.
+   Nietestowane, tanie.
+11. **Czy Nawigator udostępnia sygnał siły niezależny od Sędziego?** `wagaP`
+   pochodzi z głowicy promotorowej. Jeśli da się porównywać dwie sekwencje po
+   rozkładzie `wagaP` (uwaga: legenda mówi wprost, że jest **nieporównywalna
+   między sekwencjami** — więc trzeba znaleźć niezmiennik, np. udział masy
+   gradientu w oknie rdzenia), mamy drugie proxy, niezależne od Sędziego.
 
 ---
 
@@ -310,7 +373,9 @@ Każde proponowane rozwiązanie musi:
 
 1. produkować sekwencje **dokładnie 800 pz** ze znaków `ACGTN`, ≤ 10 % `N`, unikalne;
 2. dawać **100 sekwencji** — mniej to proporcjonalna strata w ALL100;
-3. dać się zweryfikować **u Sędziego przed wgraniem** (rozdzielczość na sekwencję);
+3. dać się zweryfikować przed wgraniem — przy czym **Sędzia służy wyłącznie jako
+   bramka „czy to nadal promotor"**, a nie jako miara siły; przegrana u Sędziego
+   **nie jest** wystarczającym powodem do odrzucenia wariantu (patrz 2.1 i 4.2);
 4. mieć **uzasadnienie biologiczne**, nie tylko „model tak powiedział" —
    50 % oceny to prezentacja, gdzie liczą się metodyka, ogólność, ograniczenia
    i odpowiedzi na pytania Jury;
