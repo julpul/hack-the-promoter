@@ -108,11 +108,23 @@ zwycięski blok powinien zdominować dziesiątkę.
 
 ## Wynik po wgraniu
 
-*(do uzupełnienia)*
-
 | pole | wartość |
 |---|---|
-| TOP10 | |
-| ALL100 | |
-| punkty | |
-| wniosek | |
+| TOP10 | **5** |
+| ALL100 | **5** |
+| punkty | **12,0** |
+
+**Wniosek: żaden z trzech wariantów nie przebił kontroli.** Bloki A (tandem),
+C (tandem + światło) i D (tandem + CreA) nie zdominowały dziesiątki najlepszych
+— gdyby którykolwiek działał, TOP10 poszłoby w górę, bo każdy blok ma 25 z 100
+sekwencji, a zwycięski blok zdominowałby TOP10.
+
+Trzy hipotezy odpadają naraz:
+- **architektura tandemowa nie jest lepsza od rozproszenia** — mimo że tak
+  buduje się syntetyczne promotory grzybowe w literaturze;
+- **zniesienie represji świetlnej** nie daje efektu (choć to był słaby test,
+  patrz zastrzeżenie wyżej — ziarna już nie miały elementów świetlnych);
+- **usunięcie CreA** nie daje efektu, mimo że była to interwencja realna
+  (2,4–3,0 miejsc → 0).
+
+`v8_ccaat` (ziarna + CCAAT rozproszone) pozostaje naszym najlepszym plikiem.

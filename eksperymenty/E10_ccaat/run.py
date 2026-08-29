@@ -83,9 +83,16 @@ def punktuj(seq: str, m: list[dict], od: int) -> float:
                for i in range(len(m)) if seq[od - 1 + i] in "ACGT")
 
 
-def kandydaci_ccaat(dziki: str, gestosc: Counter) -> list[dict]:
+def kandydaci_ccaat(dziki: str, gestosc: Counter,
+                    mediana_tss: float | None = None) -> list[dict]:
     """Miejsca oddalone o JEDNO podstawienie od pelnego CCAAT/ATTGG,
-    posortowane po tym, jak gesto naturalne promotory trzymaja tam te miejsca."""
+    posortowane po tym, jak gesto naturalne promotory trzymaja tam te miejsca.
+
+    `mediana_tss` zmienia PRZELAMYWANIE REMISOW. Bez niego remis w gestosci
+    rozstrzyga `tss` rosnaco, czyli systematycznie najdalej od TSS -- i stad
+    mediana naszych miejsc w v8 wyszla na -445 przy naturalnej -388. Z nim
+    remis rozstrzyga bliskosc do mediany rozkladu naturalnego.
+    """
     out = []
     for i in range(len(dziki) - 4):
         seg = dziki[i:i + 5]
@@ -100,7 +107,10 @@ def kandydaci_ccaat(dziki: str, gestosc: Counter) -> list[dict]:
                 "poz_zmiany": i + 1 + j, "z": seg[j], "na": cel[j],
                 "gestosc_naturalnych": gestosc.get((tss // 50) * 50, 0),
             })
-    out.sort(key=lambda d: (-d["gestosc_naturalnych"], d["tss"]))
+    if mediana_tss is None:
+        out.sort(key=lambda d: (-d["gestosc_naturalnych"], d["tss"]))
+    else:
+        out.sort(key=lambda d: (-d["gestosc_naturalnych"], abs(d["tss"] - mediana_tss)))
     return out
 
 
@@ -112,7 +122,13 @@ def nanies(seq: str, wybrane: list[dict]) -> str:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--miejsc", type=int, default=4, help="ile miejsc CCAAT nanosic")
+    ap.add_argument("--miejsc", type=int, default=4, help="ile miejsc CCAAT DODAC")
+    ap.add_argument("--docelowo", type=int, default=0, metavar="N",
+                    help="dawka DOCELOWA: uzupelnij do N miejsc lacznie (liczac te, "
+                         "ktore ziarno juz ma). Naturalna mediana rodzaju = 2.")
+    ap.add_argument("--pozycja-naturalna", action="store_true",
+                    help="remis w gestosci rozstrzygaj bliskoscia do mediany naturalnej, "
+                         "a nie odlegloscia od TSS")
     ap.add_argument("--bramka", type=int, default=0,
                     help="ile sekwencji sprawdzic u Sedziego (0 = wcale)")
     ap.add_argument("--baza", default=str(REPO / "runs" / "julian" / "v4.fasta"))
@@ -183,8 +199,13 @@ def main() -> int:
     # ── 5. projekt
     poz_nat = [p - TSS for s in NAT for p in obie_nici(s, "CCAAT")]
     gestosc = Counter((p // 50) * 50 for p in poz_nat)
-    kand = kandydaci_ccaat(dziki, gestosc)
-    wybrane = kand[:args.miejsc]
+    med_nat = st.median(poz_nat)
+    licz_nat = [len(obie_nici(s, "CCAAT")) for s in NAT]
+    print(f"\n[5a] ROZKLAD NATURALNY: mediana pozycji TSS{med_nat:+.0f}, "
+          f"mediana liczby miejsc {st.median(licz_nat):.0f}")
+    cel_tss = med_nat if args.pozycja_naturalna else None
+    kand = kandydaci_ccaat(dziki, gestosc, cel_tss)
+    wybrane = kand[:(args.docelowo or args.miejsc)]
     print(f"\n[5] PROJEKT: {len(wybrane)} podstawien -> {len(wybrane)} miejsc CCAAT")
     for k in wybrane:
         print(f"    poz {k['poz_zmiany']:>3} (TSS{k['tss']:+5})  {k['jest']} -> {k['cel']}  "
