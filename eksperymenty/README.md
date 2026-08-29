@@ -46,6 +46,11 @@ flowchart TD
         E05["E05 · Portfel<br/>12 hipotez x 8,<br/>skany zamiast szumu"]
     end
 
+    subgraph OPE["Operatory — dopisane po E01/E04"]
+        E06["E06 · Operator krzyżowania<br/>rekombinacja czy dziedziczenie?<br/>ramię: krzyżowanie przegranych"]
+        E07["E07 · Przesiew<br/>gdzie siedzą ziarna,<br/>ile jest niezależnych"]
+    end
+
     W["WNIOSKI.md<br/>rejestr globalny"]
     Z(["/wgraj"])
 
@@ -62,13 +67,22 @@ flowchart TD
     E04 --> W
     Z -->|"pozycja TOP10"| W
 
+    E01 -->|"brak scorera<br/>-> zostaje bramka"| E06
+    E04 -->|"0/48 przechodzi bramkę<br/>-> co ją w ogóle przechodzi?"| E06
+    E06 -->|"liczy się ziarno,<br/>nie operator"| E07
+    E07 -->|"100 niezależnych ziaren"| Z
+    E06 --> W
+    E07 --> W
+
     classDef blok fill:#fed7d7,stroke:#c53030,color:#742a2a
     classDef mat fill:#c6f6d5,stroke:#2f855a,color:#22543d
     classDef kon fill:#bee3f8,stroke:#2b6cb0,color:#2a4365
+    classDef ope fill:#e9d8fd,stroke:#6b46c1,color:#44337a
     classDef wn fill:#faf089,stroke:#b7791f,color:#744210
     class E01,E02 blok
     class E03 mat
     class E04,E05 kon
+    class E06,E07 ope
     class W wn
 ```
 
@@ -109,23 +123,34 @@ liczbę **niezależnych** losowań, nie liczbę sekwencji.
 
 | # | eksperyment | wywołań API | czas | blokuje |
 |---|---|---|---|---|
-| E01 | funkcja celu | ~60 | 2 min | E04, E05 |
+| E01 | funkcja celu | ~260 | 3 min | E04, E05 |
 | E02 | artefakt wagaP | ~30 | 1 min | E04, E05 |
 | E03 | naturalne promotory | ~300 | 5 min | E04, E05 |
 | E04 | blok kombinacyjny | ~200 | 10 min | E05 |
 | E05 | portfel + zgłoszenie | ~150 | 15 min | — |
+| E06 | operator krzyżowania | ~350 | 3 min | E05, E07 |
+| E07 | przesiew | ~1600 | 15 min | zgłoszenie |
 
 Limity to 600/min dla Sędziego i Nawigatora — **nic tu nie jest wąskim gardłem**.
 Wąskim gardłem jest okno 5 minut na `/wgraj` i to, że każde zgłoszenie niesie
 około jednego bitu informacji zwrotnej.
 
 ```bash
-cd eksperymenty
-python E01_funkcja_celu/run.py
-python E02_artefakt_wagap/run.py
-python E03_naturalne_promotory/run.py     # wymaga data/promotory_100.csv
-python E04_blok_kombinacyjny/run.py
-python zbuduj_notebook.py                 # -> eksperymenty.ipynb
+python eksperymenty/E01_funkcja_celu/run.py
+python eksperymenty/E02_artefakt_wagap/run.py
+python eksperymenty/E03_naturalne_promotory/run.py     # wymaga data/Promotory.csv
+python eksperymenty/E04_blok_kombinacyjny/run.py --wymus-c
+python eksperymenty/E06_operator_krzyzowania/run.py
+python eksperymenty/E07_przesiew/run.py --szeroki 80
+python eksperymenty/E07_przesiew/run.py --tylko-balans 12   # kontrola doboru proby
+
+# portfele + pomiar bramka PRZED zuzyciem okna 5 minut
+python eksperymenty/E05_portfel/portfel.py -o runs/julian/v2.fasta
+python eksperymenty/E07_przesiew/zbuduj_portfel.py -o runs/julian/v3.fasta
+python eksperymenty/E05_portfel/zmierz.py runs/julian/v3.fasta runs/julian/v2.fasta \
+                                          runs/julian/pula.fasta
+
+python eksperymenty/zbuduj_notebook.py    # -> eksperymenty.ipynb
 .venv/bin/jupyter lab eksperymenty/eksperymenty.ipynb
 ```
 

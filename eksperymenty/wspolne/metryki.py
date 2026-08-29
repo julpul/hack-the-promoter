@@ -53,7 +53,9 @@ def srodek_masy(wagi: list[float]) -> float:
 
 def metryki_mapy(odp: dict, *, rdzen_od: int = RDZEN_OD, rdzen_do: int = RDZEN_DO) -> dict:
     """Splaszcza odpowiedz /nawigator/mapa do slownika skalarow."""
-    nag = odp.get("naglowek", {})
+    # API zwraca pola naglowka na NAJWYZSZYM poziomie odpowiedzi, nie w podslowniku
+    # "naglowek". Fallback na `odp` zostawiamy dla atrap w testach offline.
+    nag = odp.get("naglowek") or odp
     poz = odp.get("pozycje", [])
     wagi = [p.get("wagaP", 0.0) for p in poz]
     n = len(wagi)

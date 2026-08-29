@@ -499,6 +499,199 @@ if Y:
     print("Sedzia nie widzi gatunku ani derepresji (W4, W7).")
 """)
 
+# ── E06 ────────────────────────────────────────────────────────────────────
+if jest("E06_operator_krzyzowania"):
+    md(r"""
+---
+# E06 · Operator krzyżowania — rekombinacja czy dziedziczenie?
+
+Rozbicie wgranej puli na sposób powstania dało dwunastokrotną różnicę:
+`nav_*` (surowe wyjścia `/edycje`) przechodzą bramkę Sędziego w **6 %**,
+`hyb_*` (krzyżówki) w **72 %**. Tyle że rodzicami krzyżówek byli **zwycięzcy
+turnieju**, więc efekt operatora jest pomieszany z preselekcją.
+
+Rozstrzyga jedno ramię: **krzyżowanie dwóch przegranych**. Jeśli ich dzieci
+wygrywają — działa operator. Jeśli nie — działała selekcja rodziców.
+""")
+
+    kod(r"""
+w06 = wczytaj("E06_operator_krzyzowania")
+r06 = pd.DataFrame([{k: v for k, v in r.items()
+                     if k not in ("sekwencja", "rodzic_a", "rodzic_b", "metryki")}
+                    for r in w06["rekordy"]])
+
+ram = (r06.groupby("ramie")
+       .agg(n=("bije_dzikiego", "size"), wygrane=("bije_dzikiego", "sum"),
+            bije_rodzica=("bije_rodzic_a", "sum"),
+            dystans=("dystans_rodzic_a", "median"))
+       .reset_index())
+ram["odsetek"] = ram["wygrane"] / ram["n"]
+ram["rola"] = np.where(ram["ramie"].str.startswith(("R1", "R2")), "kontrola", "ramię testowe")
+print(ram.to_string(index=False))
+""")
+
+    kod(r"""
+fig, ax = plt.subplots(figsize=(10, 4.8))
+BARWY = {"kontrola": "#d69e2e", "ramię testowe": "#2b6cb0"}
+sns.barplot(data=ram.sort_values("odsetek"), y="ramie", x="odsetek", hue="rola",
+            palette=BARWY, dodge=False, ax=ax, width=0.72)
+for p, (_, r) in zip(ax.patches, ram.sort_values("odsetek").iterrows()):
+    ax.text(r["odsetek"] + 0.015, p.get_y() + p.get_height() / 2,
+            f"{r['wygrane']}/{r['n']}  ({r['odsetek']:.0%})",
+            va="center", fontsize=10, color="#1a202c")
+ax.set(title="E06 · Odsetek sekwencji przechodzących bramkę Sędziego",
+       xlabel="odsetek bijących dzikiego", ylabel="", xlim=(0, 1.0))
+ax.legend(title="", loc="lower right", frameon=False)
+sns.despine(ax=ax)
+plt.show()
+""")
+
+    md(r"""
+**Jak to czytać.** Krzyżowanie **przegranych** siedzi na zerze — dokładnie tam,
+gdzie surowy dekoder. Krzyżowanie **zwycięzców** i zwykła **mutacja zwycięzcy
+o ten sam dystans** dają praktycznie to samo. Operator nie wnosi nic; wnosi
+wyłącznie to, od kogo się zaczyna.
+""")
+
+    kod(r"""
+bez_rodzica = int(r06["bije_rodzic_a"].sum())
+wszystkich = int(r06["bije_rodzic_a"].notna().sum())
+print(f'''
+   +--------------------------------------------------------------+
+   |  POTOMKOW BIJACYCH WLASNEGO RODZICA:  {bez_rodzica:>3} / {wszystkich:<3}                 |
+   +--------------------------------------------------------------+
+
+Wszystkie ramiona, wszystkie operatory. Nic nie przewyzsza swojego rodzica.
+Znaczy to, ze jedyna droga w gore jest ZNALEZIENIE lepszego ziarna, a nie
+przetwarzanie tego, ktore juz mamy. Stad E07.
+''')
+""")
+
+# ── E07 ────────────────────────────────────────────────────────────────────
+if jest("E07_przesiew"):
+    md(r"""
+---
+# E07 · Przesiew — gdzie siedzą ziarna
+
+Skoro potomek nie bije rodzica, to liczy się wyłącznie **ile niezależnych
+ziaren** uda się znaleźć. Wgrane zgłoszenie ma 39 sekwencji przechodzących
+bramkę, ale pochodzą one z **trzech** ziaren — a TOP10 jest statystyką
+pozycyjną, więc widzi trzy losowania, nie trzydzieści dziewięć (W11).
+""")
+
+    kod(r"""
+w07 = wczytaj("E07_przesiew")
+skan = pd.DataFrame([{k: v for k, v in x.items() if k != "sekwencja"} for x in w07["skan"]])
+ziarna = w07["ziarna"]
+print(f"przesiano {len(skan)} sekwencji, ziaren {len(ziarna)} ({len(ziarna)/len(skan):.1%})")
+print(f"niezaleznych skupien: {len(w07['skupienia'])} (prog {w07['prog_ziarna']} pz)")
+
+bal = json.loads((TU / "E07_przesiew" / "wyniki_balans.json").read_text(encoding="utf-8"))
+kom = pd.DataFrame(bal["komorki"])
+kom["odsetek"] = kom["trafien"] / kom["n"]
+# blad standardowy proporcji -- bez tego roznica 5 % vs 11 % wyglada na wynik
+kom["se"] = np.sqrt(kom["odsetek"] * (1 - kom["odsetek"]) / kom["n"])
+print("\nZBALANSOWANY test (rowne n na komorke):")
+print(kom[["ile_kodow", "trafien", "n", "odsetek", "se"]].to_string(index=False))
+""")
+
+    kod(r"""
+fig, ax = plt.subplots(figsize=(9, 4.6))
+sns.barplot(data=kom, x="ile_kodow", y="odsetek", color="#2b6cb0", ax=ax, width=0.66)
+ax.errorbar(range(len(kom)), kom["odsetek"], yerr=1.96 * kom["se"],
+            fmt="none", ecolor="#1a202c", capsize=5, lw=1.6)
+for i, r in kom.iterrows():
+    ax.text(i, r["odsetek"] + 1.96 * r["se"] + 0.006, f"{r['trafien']}/{r['n']}",
+            ha="center", fontsize=9.5, color="#1a202c")
+ax.set(title="E07 · Odsetek trafień w bramkę wg ile_kodow (poziom 2, równe n)",
+       xlabel="ile_kodow", ylabel="odsetek sekwencji bijących dzikiego")
+sns.despine(ax=ax)
+plt.show()
+
+print('''
+Tylko ile_kodow=4 jest martwe (0/96). Od 8 w gore wszystko lezy plasko
+w granicach 5-11 %, a przedzialy 95 % zachodza na siebie -- czyli PARAMETR
+NIE STERUJE TRAFIENIAMI. Steruje nimi liczba losowan.
+
+To potwierdza W2 z fazy 1 na nowej osi: W2 mierzylo DYSTANS, tutaj mierzymy
+ODSETEK TRAFIEN, i w obu wypadkach ile_kodow nie jest pokretlem.
+''')
+""")
+
+    kod(r"""
+# czy ziarna sa naprawde niezalezne: rozklad dystansow Hamminga parami
+sz = [z["sekwencja"] for z in ziarna]
+pary = np.array([S.hamming(sz[i], sz[j]) for i in range(len(sz)) for j in range(i + 1, len(sz))])
+
+fig, axs = plt.subplots(1, 2, figsize=(13, 4.4))
+sns.histplot(pary, bins=30, color="#2b6cb0", ax=axs[0])
+axs[0].axvline(w07["prog_ziarna"], ls="--", lw=2, color="#e53e3e")
+axs[0].text(w07["prog_ziarna"], axs[0].get_ylim()[1] * 0.94,
+            f"  próg niezależności {w07['prog_ziarna']} pz", color="#c53030", fontsize=9.5)
+axs[0].set(title="E07 · Dystanse Hamminga między ziarnami (wszystkie pary)",
+           xlabel="dystans (pz)", ylabel="liczba par")
+
+wyd = pd.DataFrame(w07["chmury"]).groupby("ziarno")["bije_dzikiego"].mean()
+sns.histplot(wyd, bins=12, color="#38a169", ax=axs[1])
+axs[1].axvline(wyd.mean(), ls="--", lw=2, color="#1a202c")
+axs[1].text(wyd.mean(), axs[1].get_ylim()[1] * 0.94,
+            f"  średnia {wyd.mean():.0%}", fontsize=9.5)
+axs[1].set(title="E07 · Wydajność chmury wokół ziarna",
+           xlabel="odsetek potomstwa utrzymującego wygraną", ylabel="liczba ziaren")
+for a in axs:
+    sns.despine(ax=a)
+plt.show()
+
+print(f"najmniejszy dystans miedzy ziarnami: {pary.min()} pz "
+      f"(prog {w07['prog_ziarna']}) -- zadna para nie jest ta sama rodzina")
+""")
+
+# ── porownanie portfeli ────────────────────────────────────────────────────
+if (TU / "E05_portfel" / "pomiar_portfela.json").exists():
+    md(r"""
+---
+# Portfele — pomiar przed zgłoszeniem
+
+Bramka Sędziego jest darmowa i powtarzalna, a okno `/wgraj` jest jedno na pięć
+minut. Nie ma powodu, żeby o składzie pliku dowiadywać się z rankingu.
+""")
+
+    kod(r"""
+pom = json.loads((TU / "E05_portfel" / "pomiar_portfela.json").read_text(encoding="utf-8"))
+NAZWY = {"pula.fasta": "v1 — wgrane zgłoszenie", "v2.fasta": "v2 — plan 12 bloków",
+         "v3.fasta": "v3 — przesiew (E07)"}
+port = pd.DataFrame([{"portfel": NAZWY.get(Path(r["plik"]).name, Path(r["plik"]).name),
+                      "n": r["n"], "przechodzi": r["przechodzi_bramke"],
+                      "odsetek": r["przechodzi_bramke"] / r["n"]}
+                     for r in pom["raporty"]]).sort_values("odsetek")
+
+BARWY3 = ["#2b6cb0", "#d69e2e", "#38a169"]
+fig, ax = plt.subplots(figsize=(10, 3.8))
+sns.barplot(data=port, y="portfel", x="odsetek", ax=ax, width=0.62,
+            hue="portfel", palette=BARWY3, legend=False)
+for p, (_, r) in zip(ax.patches, port.iterrows()):
+    ax.text(r["odsetek"] + 0.015, p.get_y() + p.get_height() / 2,
+            f"{r['przechodzi']}/{r['n']}  ({r['odsetek']:.0%})",
+            va="center", fontsize=10.5, color="#1a202c")
+ax.set(title="Odsetek sekwencji przechodzących bramkę Sędziego",
+       xlabel="", ylabel="", xlim=(0, 1.12))
+ax.set_xticks([])
+sns.despine(ax=ax, bottom=True)
+plt.show()
+print(port.to_string(index=False))
+""")
+
+    md(r"""
+> **Zastrzeżenie, bez którego ten wykres wprowadza w błąd.** Bramka Sędziego
+> mierzy *prototypowość*, nie siłę promotora (W4). Bloki 2–12 portfela v2
+> przegrywają, bo zmieniają wymiary, których Sędzia z definicji nie widzi:
+> gatunek, derepresję kataboliczną, kontekst genu. Zero na bramce **nie znaczy**,
+> że są słabe — znaczy, że nie mamy na nie żadnego lokalnego dowodu.
+> v3 optymalizuje jedyne proxy, jakie mamy, i tym samym jest najbardziej narażony
+> na prawo Goodharta z sekcji 6 briefu.
+""")
+
+
 # ── podsumowanie ───────────────────────────────────────────────────────────
 md(r"""
 ---
@@ -518,38 +711,68 @@ zgłoszeniem. Pełny rejestr: [`WNIOSKI.md`](WNIOSKI.md).
 | 10 × zwycięzcy `hybryda` | zostaje jako trzon ALL100 |
 | — | **NOWE: kombinacje.** Faza 1 nie miała ani jednej sekwencji łączącej dwie hipotezy, mimo że pozycje są rozłączne (W12) |
 | — | **NOWE: 12 bloków zamiast 5.** TOP10 to statystyka pozycyjna — liczy się liczba niezależnych hipotez, nie sekwencji (W11) |
+| — | **NOWE po E06/E07: 100 niezależnych ziaren.** Wgrane zgłoszenie ma 39 sekwencji przechodzących bramkę, ale pochodzą z **trzech** ziaren — czyli to trzy losowania, nie trzydzieści dziewięć (W22) |
 
-## Trzy rzeczy na prezentację, które nie są wynikiem, tylko metodyką
+## Jedno zdanie, jeśli nie ma czasu na resztę
 
-1. **E02 to kontrola negatywna.** Pokazanie, że sprawdziliście, czy sygnał
-   z modelu nie jest artefaktem architektury, jest mocniejsze niż samo jego
-   użycie — **niezależnie od tego, jak wypadło**.
-2. **E04 to plan faktorialny.** Efekty główne i interakcje, a nie „zmieniliśmy
-   kilka rzeczy naraz i wyszło lepiej".
-3. **W13: odrzucenie zatrutych danych wejściowych.** Sekwencje „silnych
-   promotorów" wygenerowane przez model językowy okazały się tandemowym
-   powtórzeniem `AGCTAGCTAGCTAGG` — okres 48 pz przy zgodności 1,000,
-   10 różnych 4-merów na 256, entropia 2,89 bita zamiast ~8, długość 840 zamiast
-   800. Wykryte samą statystyką sekwencji, bez dostępu do prawdy.
+**Cała optymalizacja rozstrzyga się na etapie losowania ziarna.** Ziarna
+przechodzące bramkę Sędziego stanowią ~8 % wyjść dekodera, nic ich nie
+przewyższa (1 przypadek na 494), a wszystko, co z nimi potem robimy —
+krzyżowanie, mutacja, edycja rdzenia, dopasowanie gatunkowe — w najlepszym
+razie **kopiuje ziarno z połowicznym powodzeniem**.
+
+## Cztery rzeczy na prezentację — trzy z nich negatywne
+
+Każda jest kontrolą, która unieważniła nasz własny wcześniejszy wniosek.
+To jest mocniejszy materiał niż wynik pozytywny bez kontroli.
+
+1. **E06 — kontrola, która obaliła nasz najlepszy wynik.** Mieliśmy 72 % vs 6 %
+   i gotową opowieść o sile rekombinacji. Ramię „krzyżowanie dwóch przegranych"
+   dało **0/16** — czyli tyle, co surowy dekoder. Ramię „mutacja o ten sam
+   dystans" dało 50 %, czyli tyle, co krzyżowanie. Operator nie robi nic;
+   wszystko robi preselekcja rodzica.
+2. **E07 — kontrola, która obaliła nasz własny trend.** Niezbalansowany przesiew
+   pokazywał ładną monotoniczność odsetka trafień po `ile_kodow`
+   (7,1 % → 9,2 % → 11,2 %). Przy **równym n** trend znika: poza martwym
+   `ile_kodow = 4` wszystko leży płasko w granicach 5–11 %. Pierwsza wersja
+   próbkowała wyłącznie te komórki, które trafiły w rzadkiej siatce.
+3. **W18 — konfundacja pochodzeniem.** `blad_odtworzenia` ma d Cohena = −0,48
+   między grupami i **+0,06** wewnątrz jednorodnej puli. Ten sam skalar,
+   ta sama zmienna zależna, przeciwny wniosek — zależnie od tego, czy próba
+   jest zlepkiem, czy nie.
+4. **E02 — kontrola negatywna architektury.** Szczyt `wagaP` nie drgnął przy
+   rotacji treści o 100/200/400/600 pz: siedzi na krawędzi wejścia, nie na
+   biologii. Sprawdzenie tego było warte więcej niż użycie sygnału.
 
 ## Uczciwe ograniczenia
 
+- **Bramka Sędziego to nie jest miara siły promotora** (W4), tylko
+  prototypowości. Portfel v3 maksymalizuje dokładnie to proxy i jest przez to
+  najbardziej narażony na prawo Goodharta z sekcji 6 briefu. Jedyną przesłanką,
+  że bramka koreluje z Wyrocznią, jest to, że pula o 39 % przejść dostała ALL100 #1.
+- **Zero na bramce nie znaczy „słabe".** Bloki 2–12 portfela v2 zmieniają wymiary
+  niewidoczne dla Sędziego (gatunek, derepresja, kontekst genu). Znaczy to
+  „nie mamy na to lokalnego dowodu", a nie „to nie działa".
 - Wszystkie zmienne zależne w tej fazie to **proxy z Nawigatora**. Jedynym
   prawdziwym sygnałem jest ranking po wgraniu, a on niesie ~1 bit na 5 minut
   przy pięciu drużynach.
+- W planie faktorialnym repliki przy D=0 są **identyczne** (edycje A/B/C są
+  deterministyczne), więc rozstęp replik dla połowy planu jest zerowy
+  z konstrukcji, a nie z powtarzalności pomiaru.
+- „Niezależność" ziaren to niezależność **sekwencyjna** (dystans Hamminga ≥ 40 pz),
+  nie biologiczna. Dwa odległe ziarna mogą realizować ten sam mechanizm.
 - Model nie był walidowany laboratoryjnie. Wynik to predykcja modelu, nie
   aktywność mokra.
-- Trzy repliki na komórkę planu faktorialnego to eksploracja, nie test istotności.
-- Naturalne promotory z `promotory_100.csv` **nie są etykietowane siłą**.
-  Korelacje w nich znalezione opisują strukturę, nie siłę.
 
 ## Następny krok
 
+Portfele są zbudowane i **zmierzone lokalnie**; okno `/wgraj` nie zostało zużyte.
+
 ```bash
-python eksperymenty/E05_portfel/portfel.py -o runs/julian/v2.fasta
-python -m hyppe waliduj runs/julian/v2.fasta
-python -m hyppe wgraj  runs/julian/v2.fasta --dry-run
-python -m hyppe wgraj  runs/julian/v2.fasta
+python -m hyppe waliduj runs/julian/v3.fasta
+python -m hyppe me                              # zgloszenie_mozliwe_za_s
+python -m hyppe wgraj  runs/julian/v3.fasta --dry-run
+python -m hyppe wgraj  runs/julian/v3.fasta
 ```
 """)
 
@@ -563,7 +786,8 @@ def main() -> int:
                    "language_info": {"name": "python"}}
     WYJSCIE.write_text(nbf.writes(nb), encoding="utf-8")
     gotowe = [n for n in ("E01_funkcja_celu", "E02_artefakt_wagap",
-                          "E03_naturalne_promotory", "E04_blok_kombinacyjny") if jest(n)]
+                          "E03_naturalne_promotory", "E04_blok_kombinacyjny",
+                          "E06_operator_krzyzowania", "E07_przesiew") if jest(n)]
     print(f"zapisano {WYJSCIE} ({len(nb.cells)} komorek)")
     print(f"sekcje z danymi: {', '.join(gotowe) if gotowe else 'BRAK -- uruchom run.py'}")
     return 0

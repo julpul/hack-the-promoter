@@ -10,6 +10,7 @@ Uzycie z kodu:
 
 from __future__ import annotations
 
+import http.client
 import json
 import threading
 import time
@@ -18,6 +19,10 @@ import urllib.request
 from typing import Any
 
 from .config import Config
+
+# 5xx bramy/originu -- z definicji przejsciowe. 530 = Cloudflare 1033 (origin
+# chwilowo nieosiagalny), potrafi wrocic samo w kilka sekund.
+KODY_PONAWIALNE = frozenset({500, 502, 503, 504, 520, 521, 522, 523, 524, 530})
 
 
 class ApiError(RuntimeError):
@@ -101,14 +106,19 @@ class Client:
                     tresc = json.loads(tresc)
                 except Exception:
                     pass
-                ponawialne = e.code == 503 or (e.code == 429 and sciezka != "/wgraj")
+                ponawialne = e.code in KODY_PONAWIALNE or (
+                    e.code == 429 and sciezka != "/wgraj")
                 if not ponawialne or nr == self.cfg.retries - 1:
                     return e.code, tresc
                 czekaj = float(e.headers.get("Retry-After") or 0) or 0.4 * 2**nr
                 time.sleep(min(czekaj, 8.0))
-            except urllib.error.URLError as e:
+            except (OSError, http.client.HTTPException) as e:
+                # OSError lapie tez urllib.error.URLError i ConnectionResetError.
+                # RemoteDisconnected NIE jest podklasa URLError, a przy kilkuset
+                # wywolaniach na eksperyment zrywa sie regularnie -- bez tego
+                # przebieg pada w polowie i traci wszystkie zebrane pomiary.
                 if nr == self.cfg.retries - 1:
-                    return 0, f"siec: {e}"
+                    return 0, f"siec: {type(e).__name__}: {e}"
                 time.sleep(0.4 * 2**nr)
         return 0, "wyczerpano proby"
 

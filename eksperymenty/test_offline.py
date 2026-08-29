@@ -120,13 +120,19 @@ def main() -> int:
     import eksperymenty.E03_naturalne_promotory.run as e3
     import eksperymenty.E04_blok_kombinacyjny.run as e4
     import eksperymenty.E05_portfel.portfel as e5
+    import eksperymenty.E05_portfel.zmierz as e5z
+    import eksperymenty.E06_operator_krzyzowania.run as e6
+    import eksperymenty.E07_przesiew.run as e7
+    import eksperymenty.E07_przesiew.zbuduj_portfel as e7p
 
-    for mod in (e1, e2, e3, e4, e5):
+    for mod in (e1, e2, e3, e4, e5, e5z, e6, e7, e7p):
         mod.klient = lambda **kw: mc
 
     stary = sys.argv
     for nazwa, mod, argv in (("E01", e1, ["run"]), ("E02", e2, ["run"]),
-                             ("E03", e3, ["run"]), ("E04", e4, ["run", "--replik", "2"])):
+                             ("E03", e3, ["run"]), ("E04", e4, ["run", "--replik", "2"]),
+                             ("E06", e6, ["run", "--na-ramie", "4"]),
+                             ("E07", e7, ["run", "--opcji", "4", "--na-ziarno", "3"])):
         sys.argv = argv
         try:
             mod.main()
@@ -142,6 +148,21 @@ def main() -> int:
     except Exception as exc:  # noqa: BLE001
         problemy.append(f"E05: {type(exc).__name__}: {exc}")
         print(f"  E05: BLAD -- {exc}")
+
+    wyj3 = REPO / "runs" / "test" / "v3_test.fasta"
+    sys.argv = ["zbuduj_portfel", "-o", str(wyj3), "--opcji", "4"]
+    try:
+        e7p.main()
+    except Exception as exc:  # noqa: BLE001
+        problemy.append(f"E07/portfel: {type(exc).__name__}: {exc}")
+        print(f"  E07/portfel: BLAD -- {exc}")
+
+    sys.argv = ["zmierz", str(wyj), "--bez-mapy"]
+    try:
+        e5z.main()
+    except Exception as exc:  # noqa: BLE001
+        problemy.append(f"E05/zmierz: {type(exc).__name__}: {exc}")
+        print(f"  E05/zmierz: BLAD -- {exc}")
     sys.argv = stary
 
     from hyppe import fasta as F
@@ -161,6 +182,17 @@ def main() -> int:
             problemy.append(f"tylko {len(bloki)} blokow -- portfel jest za malo rozny")
     else:
         problemy.append("portfel nie powstal")
+
+    if wyj3.exists():
+        rek3 = F.czytaj(wyj3)
+        rap3 = F.waliduj(rek3)
+        print(f"\n=== PORTFEL v3 (przesiew) ===\n{rap3.podsumowanie()}")
+        if len(rek3) != 100:
+            problemy.append(f"portfel v3 ma {len(rek3)} sekwencji zamiast 100")
+        if rap3.odrzucone:
+            problemy.append(f"portfel v3: {len(rap3.odrzucone)} odrzuconych")
+    else:
+        problemy.append("portfel v3 nie powstal")
 
     r = subprocess.run([sys.executable, str(REPO / "eksperymenty" / "zbuduj_notebook.py")],
                        capture_output=True, text=True)

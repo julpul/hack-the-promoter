@@ -108,6 +108,8 @@ def zbuduj(c, dziki: str, uzyj_c: bool, replik: int) -> list[dict]:
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--bez-c", action="store_true", help="wymus plan 2^3 bez rdzenia")
+    ap.add_argument("--wymus-c", action="store_true",
+                    help="zmierz czynnik C mimo werdyktu ARTEFAKT z E02 (patrz nizej)")
     ap.add_argument("--replik", type=int, default=3)
     args = ap.parse_args()
 
@@ -117,8 +119,15 @@ def main() -> int:
     uzyj_c = not args.bez_c
     if uzyj_c and c_wyciety():
         print("E02 orzeklo ARTEFAKT (szczyt zostal na koncu we WSZYSTKICH rotacjach)")
-        print("-> czynnik C wyciety, plan schodzi do 2^3")
-        uzyj_c = False
+        if args.wymus_c:
+            # E02 obalilo LOKALIZACJE szczytu, nie cala informacje w oknie 783-800:
+            # `masa_rdzenia` nadal zalezy od tresci, a w E01 okazala sie najsilniejszym
+            # wewnatrzpulowym korelatem werdyktu Sedziego. Wolimy ten czynnik ZMIERZYC
+            # niz zalozyc, ze jest zerowy -- plan 2^3 zostaje w srodku jako polowa C=0.
+            print("-> --wymus-c: czynnik C ZOSTAJE, plan 2^4 (2^3 to jego polowa C=0)")
+        else:
+            print("-> czynnik C wyciety, plan schodzi do 2^3")
+            uzyj_c = False
 
     komorki = zbuduj(c, dziki, uzyj_c, args.replik)
     print(f"\n{len(komorki)} sekwencji "

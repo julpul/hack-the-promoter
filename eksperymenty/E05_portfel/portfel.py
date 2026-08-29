@@ -67,8 +67,19 @@ def _scorer(rekord_metryk: dict) -> float:
 # ── bloki ──────────────────────────────────────────────────────────────────
 
 def blok_01(c, dziki, n, ctx):
+    """Trzon ALL100: sekwencje z wgranej puli, ktore PRZECHODZA bramke Sedziego.
+
+    Wersja pierwotna brala pierwsze `n` sekwencji z pliku. Plik zaczyna sie od
+    rodziny `nav_*` (surowe wyjscia dekodera), ktora przechodzi bramke w 6 %
+    przypadkow, podczas gdy `hyb_*` w 72 % (E06). Blok majacy zabezpieczac
+    srednia skladal sie wiec z najslabszej czesci puli -- stad 0/12 w pomiarze.
+    """
     pula = K.wczytaj_pule()
-    return {f"b01_trzon_{i:02d}": s for i, s in enumerate(list(pula.values())[:n])}
+    wygrane = [(nazwa, s) for nazwa, s in pula.items() if c.lepsza(dziki, s)]
+    ctx["zwyciezcy_puli"] = [s for _, s in wygrane]
+    print(f"    [b01] bramke przechodzi {len(wygrane)}/{len(pula)} sekwencji puli")
+    wybor = wygrane or list(pula.items())
+    return {f"b01_trzon_{i:02d}": s for i, (_, s) in enumerate(wybor[:n])}
 
 
 def blok_02(c, dziki, n, ctx):

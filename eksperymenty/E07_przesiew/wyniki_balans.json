@@ -1,0 +1,45 @@
+{
+ "eksperyment": "E07_przesiew_balans",
+ "poziom": 2,
+ "wywolan_na_komorke": 12,
+ "opcji": 8,
+ "komorki": [
+  {
+   "poziom": 2,
+   "ile_kodow": 4,
+   "n": 96,
+   "trafien": 0
+  },
+  {
+   "poziom": 2,
+   "ile_kodow": 8,
+   "n": 96,
+   "trafien": 7
+  },
+  {
+   "poziom": 2,
+   "ile_kodow": 12,
+   "n": 96,
+   "trafien": 5
+  },
+  {
+   "poziom": 2,
+   "ile_kodow": 16,
+   "n": 96,
+   "trafien": 6
+  },
+  {
+   "poziom": 2,
+   "ile_kodow": 24,
+   "n": 96,
+   "trafien": 11
+  },
+  {
+   "poziom": 2,
+   "ile_kodow": 32,
+   "n": 96,
+   "trafien": 8
+  }
+ ],
+ "_zebrano": "2026-08-29T15:24:59"
+}
