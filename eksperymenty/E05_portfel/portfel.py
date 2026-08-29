@@ -290,7 +290,14 @@ def main() -> int:
     dziki = c.dziki_seq()
     ctx: dict = {}
     zebrane: dict[str, str] = {}
-    raport = []
+    widziane: set[str] = set()          # dedup po SEKWENCJI, nie po etykiecie
+
+    def przyjmij(etyk: str, sekw: str) -> bool:
+        if sekw in widziane or etyk in zebrane or F.problemy(sekw):
+            return False
+        zebrane[etyk] = sekw
+        widziane.add(sekw)
+        return True
 
     for nazwa, ile in BUDZET.items():
         try:
@@ -298,28 +305,42 @@ def main() -> int:
         except Exception as e:  # noqa: BLE001
             print(f"  [{nazwa}] BLAD: {e}", file=sys.stderr)
             wynik = {}
-        nowe = {k: v for k, v in wynik.items() if v not in zebrane.values()}
-        zebrane.update(dict(list(nowe.items())[:ile]))
-        raport.append((nazwa, ile, min(len(nowe), ile)))
-        print(f"  {nazwa:<22} plan {ile:>3}  zbudowano {min(len(nowe), ile):>3}")
-
-    # budzet z pustych blokow -> bloki elastyczne
-    brak = CEL - len(zebrane)
-    if brak > 0:
-        print(f"\nbrakuje {brak} sekwencji -> dosypuje z blokow elastycznych")
-        for nazwa in ELASTYCZNE:
-            if brak <= 0:
+        dodano = 0
+        for k, v in wynik.items():
+            if dodano >= ile:
                 break
-            dodatkowe = BLOKI[nazwa](c, dziki, BUDZET[nazwa] + brak, ctx)
-            for k, v in dodatkowe.items():
-                if brak <= 0:
-                    break
-                if k not in zebrane and v not in zebrane.values():
-                    zebrane[k] = v
-                    brak -= 1
-    while len(zebrane) < CEL:   # ostatnia deska: warianty trzonu
-        i = len(zebrane)
-        zebrane[f"b01_dopelnienie_{i:02d}"] = S.mutuj(dziki, ile=2, ziarno=9000 + i)
+            dodano += przyjmij(k, v)
+        print(f"  {nazwa:<22} plan {ile:>3}  zbudowano {dodano:>3}"
+              + ("" if dodano == ile else "   <- niedobor, budzet idzie do dopelnienia"))
+
+    # ── dopelnienie: rozprowadzamy niedobor po TANICH SKANACH, nie w jedno miejsce.
+    # Skan parametru jest jednoczesnie bardziej rozny i bardziej informatywny
+    # niz szum wokol jednego punktu (patrz PLAN.md, W11).
+    brak = CEL - len(zebrane)
+    if brak:
+        print(f"\ndopelnienie: brakuje {brak} -> rozprowadzam po skanach parametrow")
+        baza = ctx.get("gatunek_punkt_staly", dziki)
+        m = c.mapa(baza)
+        swobodne = [p["poz"] for p in m["pozycje"] if p["rekon"] == 0]
+        for i in range(2000):
+            if len(zebrane) >= CEL:
+                break
+            tryb = i % 4
+            if tryb == 0:      # skan TATA co 2 pz w oknie -80..-30
+                poz = 720 + (i // 4) % 50
+                przyjmij(f"dop_tata_{poz}_{i}", S.wstaw(baza if i % 8 < 4 else dziki,
+                                                        "TATAAA", poz))
+            elif tryb == 1:    # okolica punktu stalego, tylko pozycje swobodne
+                przyjmij(f"dop_okolica_{i}",
+                         S.mutuj(baza, ile=2 + (i // 4) % 6, pozycje=swobodne, ziarno=i))
+            elif tryb == 2:    # krzyzowanie trzonu z wariantem gatunkowym
+                pula = list(zebrane.values())
+                przyjmij(f"dop_krzyz_{i}",
+                         S.krzyzuj(pula[i % len(pula)], baza, punktow=2, ziarno=i))
+            else:              # skan okna rdzenia poli-pirymidynowego
+                poz = M.RDZEN_OD - 4 + (i // 4) % 5
+                przyjmij(f"dop_rdzen_{poz}_{i}",
+                         K.podmien_okno(dziki, poz, poz + 5, "CTCTCT"))
 
     rekordy = [F.Rekord(k, v) for k, v in list(zebrane.items())[:CEL]]
     rap = F.waliduj(rekordy)

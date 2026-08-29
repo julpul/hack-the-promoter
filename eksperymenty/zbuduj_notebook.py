@@ -306,7 +306,7 @@ generatora. Te sto sekwencji przerywa pętlę.
 w03 = wczytaj("E03_naturalne_promotory")
 nat = pd.DataFrame([{k: v for k, v in r.items() if k not in ("sekwencja", "kmery", "metryki", "motywy", "sklad")}
                     | (r.get("metryki") or {}) for r in w03["rekordy"]])
-nat.pop("pozycje_rekomendacji", None)
+nat = nat.drop(columns=["pozycje_rekomendacji"], errors="ignore")
 print(f"naturalnych: {len(nat)}   bijacych dzikiego: {int(nat['bije_dzikiego'].sum())}")
 
 fig, axs = plt.subplots(1, 3, figsize=(14, 4))
@@ -422,7 +422,7 @@ Wyroczni — trzy repliki na komórkę to eksploracja, nie test istotności.
 w04 = wczytaj("E04_blok_kombinacyjny")
 kom = pd.DataFrame([{k: v for k, v in c.items() if k not in ("sekwencja", "rodzic", "metryki")}
                     | (c.get("metryki") or {}) for c in w04["komorki"]])
-kom.pop("pozycje_rekomendacji", None)
+kom = kom.drop(columns=["pozycje_rekomendacji"], errors="ignore")
 CZYN = [c for c in w04["czynniki"] if kom[c].nunique() > 1]
 
 Y = next((y for y in ("blad_odtworzenia", "zmian_pod_gatunek", "srodek_masy")

@@ -17,3 +17,8 @@ data/*
 # srodowisko notebooka
 .venv/
 hipotezy.html
+
+# eksperymenty fazy 2: wyniki commitujemy (sa dowodem), archiwum i notebook nie
+eksperymenty/*/archiwum/
+eksperymenty/eksperymenty.ipynb
+eksperymenty/**/kandydaci.fasta

@@ -104,9 +104,13 @@ def main() -> int:
     # --- chimery: prawdziwe DNA po obu stronach ciecia
     chimery = []
     if not args.bez_chimer:
-        rodzice = (wygrywajace or sorted(
-            rekordy, key=lambda r: r.get("metryki", {}).get("blad_odtworzenia", 999)
-        ))[:5]
+        # metryki bywaja puste (mapa liczona tylko dla podzbioru) -- None nie
+        # da sie porownac, wiec sprowadzamy brak do wartosci sentinel.
+        def _klucz(r):
+            v = (r.get("metryki") or {}).get("blad_odtworzenia")
+            return 999 if v is None else v
+
+        rodzice = (wygrywajace or sorted(rekordy, key=_klucz))[:5]
         for r in rodzice:
             for ciecie, opis in ((M.RDZEN_OD - 1, "rdzen_od_naturalnego"),
                                  (M.RDZEN_DO, "rdzen_od_dzikiego"),

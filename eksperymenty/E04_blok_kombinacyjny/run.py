@@ -54,11 +54,16 @@ def c_wyciety() -> bool:
 def rozbij_crea(sekw: str, poz: int = 560, ziarno: int = 0) -> str:
     """Niszczy motyw SYGGRG. Niezmienne GG na pozycjach 3-4 motywu -> GG->TT.
 
+    Celujemy w trafienie NAJBLIZSZE `poz` (w dzikim CreA siedzi na 560), a nie
+    w pierwsze w sekwencji -- edytowane warianty moga miec dodatkowe miejsca
+    SYGGRG powstale przypadkiem i podmiana nie tego, co trzeba, cicho zepsulaby
+    caly czynnik B planu faktorialnego.
+
     Replika (ziarno != 0) uzywa innego podstawienia o tym samym efekcie,
     zeby oddzielic efekt hipotezy od efektu konkretnej litery.
     """
     trafienia = S.znajdz_iupac(sekw, S.MOTYWY["CreA"])
-    p = trafienia[0] if trafienia else poz
+    p = min(trafienia, key=lambda t: abs(t - poz)) if trafienia else poz
     podmiana = {0: "TT", 1: "AA", 2: "TA"}[ziarno % 3]
     return S.wstaw(sekw, podmiana, p + 2)
 

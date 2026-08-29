@@ -104,7 +104,15 @@ def wczytaj_naturalne(sciezka: Path | str | None = None) -> list[dict]:
     Kolumny CSV bywaja rozne miedzy wydaniami materialow, wiec nazwa jest
     wyszukiwana elastycznie.
     """
-    p = Path(sciezka) if sciezka else REPO / "data" / "promotory_100.csv"
+    if sciezka:
+        p = Path(sciezka)
+    else:
+        # nazwa pliku bywa rozna miedzy wydaniami materialow
+        kandydaci_nazw = ["promotory_100.csv", "Promotory.csv", "promotory.csv",
+                          "Promotory_100.csv"]
+        p = next((REPO / "data" / n for n in kandydaci_nazw
+                  if (REPO / "data" / n).exists()),
+                 REPO / "data" / "promotory_100.csv")
     if not p.exists():
         raise FileNotFoundError(
             f"brak {p}. To plik z materialow hackathonu -- wrzuc go do data/ "

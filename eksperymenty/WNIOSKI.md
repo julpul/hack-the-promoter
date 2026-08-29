@@ -143,3 +143,81 @@ Uzupełniać po każdym eksperymencie. Puste pola = jeszcze nie wiemy.
 |---|---|---|---|---|---|---|
 | 1 | `runs/julian/pula.fasta` | `hybryda`: 1 z mapy + 49 z `/edycje` + 50 krzyżówek | **1** | 2 | 17,5 | jednorodna pula — wysoka średnia, brak ogona (W8) |
 | 2 | | | | | | |
+
+---
+
+## Faza 3 — wyniki E02 i E03 (uruchomione 2026-08-29)
+
+### W10 — ROZSTRZYGNIĘTE: szczyt `wagaP` to **artefakt brzegowy**
+
+**[OBALONE]** — interpretacja biologiczna okna 783–800 upada.
+
+Bateria 15 sekwencji (E02) + 100 naturalnych promotorów (E03), łącznie
+**101 różnych sekwencji**. Wynik `argmax(wagaP)`:
+
+```
+poz. 788 : 100 ze 101 sekwencji
+poz.  13 :   1 ze 101
+```
+
+Szczyt nie drgnął dla: rotacji o 100/200/400/600 pz (treść przesunięta,
+szczyt został), odwrócenia, trzech permutacji, trzech sekwencji losowych,
+podmiany całego rdzenia na losowy i na poli-A. **Sygnał nie zależy od treści** —
+zależy wyłącznie od odległości od krawędzi wejścia.
+
+> **Konsekwencja:** wszystkie plany oparte na „rdzeniu promotora przy TSS"
+> tracą uzasadnienie. W planie portfela było na to ~30 sekwencji.
+> `wagaP` **nie jest** mapą ważności biologicznej.
+
+Zastrzeżenie: **masa** gradientu w tym oknie nadal zależy od treści
+(0,10–0,38 dla naturalnych, dziki 0,32). Artefaktem jest *lokalizacja* szczytu,
+niekoniecznie cała informacja w `wagaP`.
+
+### W12 — Żaden naturalny promotor nie bije dzikiego
+
+**[POTWIERDZONE]** — 0/100 naturalnych promotorów *Trichoderma* (19 gatunków)
+wygrało z dzikim u Sędziego. Chimery dziki×naturalny: 0/15.
+
+Razem z W5 (0/80 losowych) i W6 (plateau) domyka obraz: **Sędzia praktycznie
+nigdy nie stawia niczego nad dzikim.** Jako funkcja celu jest bezużyteczny;
+jako bramka „czy to promotor" — działa.
+
+### W13 — `blad_odtworzenia` to detektor pochodzenia sekwencji
+
+**[POTWIERDZONE]** — rozkłady **rozłączne**, bez ani jednego przypadku brzegowego:
+
+| zbiór | n | `blad_odtworzenia` (min–mediana–max) |
+|---|---|---|
+| sekwencje z dekodera (nasza pula) | 44 | **16 – 21,5 – 27** |
+| naturalne promotory *Trichoderma* | 100 | **63 – 77 – 95** |
+| dziki `pks1` | 1 | 80 |
+| `z_mapy` (dziki + 9 ręcznych zmian) | 1 | 79 |
+
+Luka 28–62 jest **pusta**. Jedno wywołanie `/mapa` wystarcza, by rozstrzygnąć,
+czy sekwencja pochodzi z dekodera, czy jest prawdziwym DNA.
+
+> **Konsekwencja dla zgłoszenia:** cała nasza wgrana pula ma wartość ~21 przy
+> naturalnych ~77. Jeśli Wyrocznia była trenowana na prawdziwych promotorach,
+> sto sekwencji leżących dokładnie na rozmaitości autoenkodera jest
+> systematycznie poza rozkładem treningowym. To **mierzalna, jednowymiarowa
+> cecha odróżniająca nasze zgłoszenie od prawdziwych promotorów** — i darmowy
+> regulator: chcąc „naturalności", celujemy w `blad_odtworzenia` ≈ 63–95.
+
+### W14 — Nagłówek `/mapa` daje skalary, ale żaden nie przewiduje Sędziego
+
+**[CZĘŚCIOWO OBALONE]** — rewizja W9.
+
+Pola nagłówka **wariują** między sekwencjami (n=100 naturalnych):
+`blad_odtworzenia` 63–95, `nie_rekonstruuje` 71–106, `zmian_pod_gatunek` 1–17,
+`masa_rdzenia` 0,10–0,38. Czyli skalary istnieją.
+
+Ale **nie separują** zwycięzców od przegranych u Sędziego (45 sekwencji naszej
+puli, d Cohena): `masa_rdzenia` −0,45 · `blad_odtworzenia` −0,16 ·
+`nie_rekonstruuje` −0,13 · `zmian_pod_gatunek` +0,15. Wszystkie poniżej progu
+efektu średniego.
+
+Dodatkowo `zmian_pod_gatunek` **nie wyróżnia P1**: dziki (prawdziwy promotor P1)
+ma 9, mediana obcych gatunków też 9, a promotor *T. reesei* ma **1** — czyli
+„lepiej dopasowany do P1" niż sam P1. To pole nie jest miarą przynależności
+do szczepu i **nie nadaje się na funkcję celu**.
+

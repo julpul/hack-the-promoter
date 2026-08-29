@@ -72,9 +72,12 @@ CZĘŚCIOWY. Jeśli ARTEFAKT — `run.py` sam go wycina i plan schodzi do 2³.
 promotorów *Trichoderma* wyrównanych do TSS). Zapasowo, jeśli E03 nie
 uruchomione: wariant z elementem Inr-podobnym.
 
-**Krytyczne:** nadpisanie musi być **ostatnim** krokiem. Dekoder nadpisze
-edycję na 12 z 18 pozycji rdzenia (`rekon=1`, zero dźwigni — patrz H1).
-Kolejność to zawsze `/edycje` → ręczna edycja, nigdy odwrotnie.
+**Krytyczne:** nadpisanie musi być **ostatnim** krokiem. Z 18 pozycji rdzenia
+**16 ma `rekon=1`**, czyli odtwarzają się z samych kodów — przepuszczenie
+sekwencji przez enkoder-dekoder je regeneruje. Trzy z nich (784, 788, 792) mają
+do tego zero dźwigni, więc dekoder wypisuje je ze swojego prioru **niezależnie
+od kodów** i nie da się ich ruszyć żadną edycją latentu. Swobodne są tylko dwie:
+790 i 798. Kolejność to zawsze `/edycje` → ręczna edycja, nigdy odwrotnie.
 
 ### D — tło (0/1)
 `0` = dziki jako podkład. `1` = wyjście `/nawigator/edycje` (poziom 2,
