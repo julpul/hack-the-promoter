@@ -1,0 +1,31 @@
+{
+  "eksperyment": "E12_uas_swiatlo",
+  "plik": "v13_uas_swiatlo.fasta",
+  "bramka": "18/20",
+  "bloki": {
+    "A": {
+      "n": 25,
+      "ccaat_sr": 3.68,
+      "lre_sr": 0.04,
+      "crea_sr": 2.44
+    },
+    "B": {
+      "n": 25,
+      "ccaat_sr": 2.6,
+      "lre_sr": 0.08,
+      "crea_sr": 3
+    },
+    "C": {
+      "n": 25,
+      "ccaat_sr": 3.32,
+      "lre_sr": 0,
+      "crea_sr": 2.4
+    },
+    "D": {
+      "n": 25,
+      "ccaat_sr": 3.08,
+      "lre_sr": 0.16,
+      "crea_sr": 0
+    }
+  }
+}

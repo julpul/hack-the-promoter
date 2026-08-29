@@ -9,6 +9,7 @@ venv/
 
 # wyniki i dane robocze
 runs/*
+!runs/julian/*.md
 !runs/.gitkeep
 data/*
 !data/.gitkeep
