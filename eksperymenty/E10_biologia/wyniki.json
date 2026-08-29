@@ -1,0 +1,89 @@
+{
+  "eksperyment": "E10_biologia",
+  "portfele": {
+    "B0": {
+      "plik": "v9_B0_linia_bazowa.fasta",
+      "n": 100,
+      "dystans_od_dzikiego": [
+        1,
+        1,
+        1
+      ],
+      "gc": [
+        0.474,
+        0.475,
+        0.476
+      ],
+      "traktow_poliAT": [
+        0,
+        0,
+        1
+      ],
+      "bramka": "0/15",
+      "blad_odtworzenia": [
+        80,
+        80,
+        81,
+        81,
+        81,
+        82
+      ]
+    },
+    "B1": {
+      "plik": "v10_B1_poliAT.fasta",
+      "n": 100,
+      "dystans_od_dzikiego": [
+        17,
+        64,
+        128
+      ],
+      "gc": [
+        0.361,
+        0.418,
+        0.465
+      ],
+      "traktow_poliAT": [
+        2,
+        5,
+        8
+      ],
+      "bramka": "2/15",
+      "blad_odtworzenia": [
+        69,
+        76,
+        78,
+        80,
+        81,
+        81
+      ]
+    },
+    "B2": {
+      "plik": "v11_B2_chimery_P1.fasta",
+      "n": 100,
+      "dystans_od_dzikiego": [
+        47,
+        151,
+        527
+      ],
+      "gc": [
+        0.407,
+        0.487,
+        0.598
+      ],
+      "traktow_poliAT": [
+        0,
+        0,
+        2
+      ],
+      "bramka": "1/15",
+      "blad_odtworzenia": [
+        74,
+        77,
+        78,
+        82,
+        83,
+        92
+      ]
+    }
+  }
+}
