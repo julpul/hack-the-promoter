@@ -594,3 +594,56 @@ narzędzia są ślepe. 100/100 ziaren dostało miejsce, 0 odrzuconych w walidacj
 > **nazwane miejsce wiązania białka** w pozycji wziętej z rozkładu naturalnego.
 > Sędzia tego nie zobaczy (mierzy prototypowość dekodera) — i to nie jest powód
 > do odrzucenia.
+
+
+### W25 — LINIA BAZOWA: dziki jest DUŻO gorszy niż nasze portfele
+
+**[POTWIERDZONE]** — E10/B0, pomiar, który unieważnia W24 i „centralny fakt"
+z `PLAN_BIOLOGICZNY.md`.
+
+`v9_B0_linia_bazowa.fasta` = 100 kopii dzikiego, każda z **dokładnie jednym**
+podstawieniem (GC 47,4–47,6 %, `blad_odtworzenia` 80–82 przy dzikim 80).
+
+| zgłoszenie | zmiana wobec dzikiego | TOP10 | ALL100 | punkty |
+|---|---|---|---|---|
+| **B0 linia bazowa** | **1 pz** | **9** | **8** | **5,0** |
+| v8 CCAAT | 5–15 pz | 5 | 4 | 13,0 |
+| v4 / v5 dekoder | ~100 pz | **4** | 4 | **14,0** |
+
+**Nasza optymalizacja działa i to mocno: pięć pozycji rankingu nad punktem
+wyjścia.** Instrument jest w pełni zdolny odróżnić dobre od złego — hipoteza W2
+(„poprawa poniżej rozdzielczości skali") upada dla efektów tej wielkości.
+
+> **Sprostowanie „centralnego faktu".** Wniosek „siedem mechanizmów, jeden
+> wynik → nic nie działa" był **odwrotny do prawdy**. Wszystkie mechanizmy
+> działają i **zbiegają do wspólnego plateau daleko powyżej dzikiego**.
+> Brakowało jedynie punktu odniesienia, żeby to zobaczyć. Klasyczny przykład
+> na to, że bez kontroli nie da się odróżnić „nic nie działa" od
+> „wszystko działa tak samo dobrze".
+
+### W26 — CCAAT odzyskuje ~90 % zysku przy 15 pz zamiast 100
+
+**[POTWIERDZONE]** — reinterpretacja v8 w świetle W25.
+
+Odległość od bazy w punktach: B0 = 5,0 → v8 = 13,0 → v4 = 14,0.
+**Wstawienie kilku boksów CCAAT (5–15 pz) daje 8 z 9 punktów, które daje
+cała maszyneria dekodera (~100 pz zmian i 594 losowania.)**
+
+Wcześniej odczytaliśmy v8 jako „bez efektu", bo porównywaliśmy go z naszymi
+portfelami zamiast z punktem wyjścia. To najbardziej wydajna edycja, jaką
+znaleźliśmy — i jedyna z **mechanizmem molekularnym** (rekrutacja kompleksu
+HAP/CBC), a nie z losowania.
+
+### W27 — Bramka Sędziego jednak koreluje z Wyrocznią
+
+**[REWIZJA W4]** — obawa o prawo Goodharta była przesadzona.
+
+Sekwencje przechodzące bramkę (portfele dekodera) stoją 5 pozycji nad dzikim,
+który bramki nie przechodzi. Sędzia nie jest bezużyteczny jako sygnał —
+jest **zgrubny**, ale wskazuje właściwy kierunek. Nie unieważnia to W4
+(mierzy prototypowość, nie siłę), ale unieważnia wniosek praktyczny
+„bramka nic nie mówi o ocenie".
+
+Zastrzeżenie: v8 (CCAAT) **nie przechodzi bramki**, a punktuje niemal tak samo
+jak portfele, które ją przechodzą. Czyli bramka wskazuje **jedną z kilku**
+dróg na plateau, nie jedyną.
